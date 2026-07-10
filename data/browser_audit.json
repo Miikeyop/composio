@@ -1,0 +1,2281 @@
+{
+  "metadata": {
+    "generated_by": "scripts/browser_verify.py",
+    "method": "Browser Use Cloud SDK verification for the first sampled apps when BROWSER_USE_API_KEY is present, plus concurrent HTTP evidence fetching and claim snippets for the full sample.",
+    "sample_count": 30,
+    "browser_use_sdk": "browser-use-sdk",
+    "browser_use_enabled": true
+  },
+  "summary": {
+    "sample_count": 30,
+    "verdict_counts": {
+      "partial": 11,
+      "unreachable": 3,
+      "supported": 16
+    },
+    "reachable_sources": 47,
+    "browser_use_count": 2,
+    "browser_use_completed": 2
+  },
+  "browser_use_cloud": [
+    {
+      "app": "Salesforce",
+      "status": "completed",
+      "model": "gpt-5.4-mini",
+      "session_id": "130fed4c-3205-4d89-83c8-4824dcde41c5",
+      "output": {
+        "app": "Salesforce",
+        "verdict": "partial",
+        "checked_urls": [
+          "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+          "https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_flows.htm"
+        ],
+        "supporting_snippets": [
+          "Salesforce Developers: \"About REST API | REST API Developer Guide\"",
+          "Salesforce Help: \"OAuth Authorization Flows\"",
+          "The REST page source includes Salesforce authprovider/community metadata, but not the full requested integration surface"
+        ],
+        "contradictions": [
+          "GraphQL was not found on either retrieved page",
+          "SOAP, SDK, self_serve, buildable, and MCP community status were not evidenced in the fetched text"
+        ],
+        "notes": "The official pages support REST and OAuth-related auth topics, but the retrieved content did not fully verify the full claim set."
+      }
+    },
+    {
+      "app": "HubSpot",
+      "status": "completed",
+      "model": "gpt-5.4-mini",
+      "session_id": "c766e3d9-2b01-4dcf-81be-7dd2a015ec33",
+      "output": {
+        "app": "HubSpot",
+        "verdict": "partial",
+        "checked_urls": [
+          "https://developers.hubspot.com/docs/api/overview",
+          "https://developers.hubspot.com/docs/apps/authentication",
+          "https://developers.hubspot.com/docs/apps/developer-platform/add-features/configure-webhooks.md",
+          "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+          "https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview",
+          "https://developers.hubspot.com/docs/llms.txt"
+        ],
+        "supporting_snippets": [
+          "API reference says all APIs use the same root path as before: https://api.hubapi.com/ (REST API surface).",
+          "Authentication docs say \"Configure your app to use OAuth\" and private apps \"generate an access token that's unique to your app.\"",
+          "Webhook docs say webhooks send a POST request to your endpoint when subscribed events occur; MCP docs say the remote HubSpot MCP server uses OAuth credentials with PKCE."
+        ],
+        "contradictions": [
+          "The official pages do not label buildability as \"easy_win.\"",
+          "The official pages do not label MCP status as \"community\"; they describe an official remote HubSpot MCP server."
+        ],
+        "notes": "Official docs support OAuth2/private app tokens, self-serve credential creation, REST, and webhooks, but do not support the requested buildability or MCP-status labels."
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "Salesforce",
+      "category": "CRM and Sales",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "SOAP",
+          "GraphQL",
+          "SDK"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+          "status": 200,
+          "error": null,
+          "text_length": 21,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+              "snippet": "Salesforce Developers"
+            }
+          ]
+        },
+        {
+          "url": "https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_flows.htm",
+          "status": 200,
+          "error": null,
+          "text_length": 62,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access"
+        ],
+        "missing_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "HubSpot",
+      "category": "CRM and Sales",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "private app token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developers.hubspot.com/docs/api/overview",
+          "status": null,
+          "error": "TimeoutError: The read operation timed out",
+          "text_length": 0,
+          "claim_snippets": []
+        },
+        {
+          "url": "https://developers.hubspot.com/docs/apps/authentication",
+          "status": 200,
+          "error": null,
+          "text_length": 28,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [],
+        "missing_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Zendesk",
+      "category": "Support and Helpdesk",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "API token",
+          "Basic"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developer.zendesk.com/api-reference/",
+          "status": 200,
+          "error": null,
+          "text_length": 3325,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer.zendesk.com/api-reference/",
+              "snippet": "API Reference Home | Zendesk Developer Docs zendev_horizontal zendev_horizontal Documentation API Reference Search / API Reference API Reference Home Introduction Betas and EAPs Changelog Capabilities Ticketing Help Center AI Agents Conversations (Messaging) Voice Custom Data Workforce Management (WFM) Omnichannel Status Live Chat Sales"
+            },
+            {
+              "claim": "surface",
+              "term": "webhook",
+              "url": "https://developer.zendesk.com/api-reference/",
+              "snippet": "ice Custom Data Workforce Management (WFM) Omnichannel Status Live Chat Sales CRM IT Asset Management Embeddables Zendesk Web Widget and SDKs Web Widget (Classic) Answer Bot Extensions Apps Webhooks Integration Services Amazon EventBridge API Reference Welcome to the Zendesk API reference docs. Whether you're an experienced developer and Zendesk user or just starting out, this is where you'll find the documentation you need. Most of our APIs are organized by product capabilities. You'll find API"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://developer.zendesk.com/api-reference/",
+              "snippet": "orkflows. AI Agents API Messaging Unify messages from every channel into a single conversation and build interactive experiences. Conversations API Voice Call center software. Talk API Talk Partner Edition API Custom data Connect and understand all your customer data wherever it lives. Custom Objects API Legacy Custom Objects API Omnichannel Access features and functionality that span Zendesk channels. Omnichannel APIs Status Get a list of active incidents and scheduled maintenance that may affe"
+            }
+          ]
+        },
+        {
+          "url": "https://developer.zendesk.com/documentation/api-basics/authentication/",
+          "status": 403,
+          "error": "HTTPError: 403",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Plain",
+      "category": "Support and Helpdesk",
+      "claimed": {
+        "auth_methods": [
+          "API key"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "GraphQL",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://www.plain.com/docs/api-reference/introduction",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        },
+        {
+          "url": "https://www.plain.com/docs/api-reference/authentication",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 0,
+        "support_claim_types": [],
+        "missing_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "verdict": "unreachable"
+      }
+    },
+    {
+      "app": "Slack",
+      "category": "Communications and Messaging",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "bot token",
+          "app token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Events",
+          "Webhooks",
+          "Socket Mode"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://api.slack.com/apis",
+          "status": 200,
+          "error": null,
+          "text_length": 4098,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://api.slack.com/apis",
+              "snippet": "Slack APIs | Slack Developer Docs guide Skip to main content Guides Reference Samples Tools Changelog Dev Program MANAGE APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs Overview Web API Events API Slack Connect App management App manifests Admin resources Authentication Block Kit Enterprise Enterpris"
+            },
+            {
+              "claim": "surface",
+              "term": "api reference",
+              "url": "https://api.slack.com/apis",
+              "snippet": "r updates only a few times an hour. Set your feed reader to poll for updates often (for example, once a minute) if you need to be notified immediately of a Slack issue. See the Slack Status API reference for endpoint information. Other APIs ​ Beyond the Web and Events APIs, we have a range of other niche APIs that are suitable for specific types of apps. Admin API are a subset of Web APIs that are geared towards automating and simplifying the administration of Slack organizations. SCIM API are a"
+            },
+            {
+              "claim": "gating",
+              "term": "enterprise",
+              "url": "https://api.slack.com/apis",
+              "snippet": "E APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs Overview Web API Events API Slack Connect App management App manifests Admin resources Authentication Block Kit Enterprise Enterprise Search for apps GovSlack Interactivity Messaging Slack Marketplace Surfaces Workflows Legacy 日本語版ページ APIs On this page Slack APIs Every Slack app and workflow has access to a range of APIs that provide access to read, write, and update many types of data in Slack. Read on to learn about"
+            }
+          ]
+        },
+        {
+          "url": "https://api.slack.com/authentication",
+          "status": 200,
+          "error": null,
+          "text_length": 2754,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://api.slack.com/authentication",
+              "snippet": "og Dev Program MANAGE APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs App management App manifests Admin resources Authentication Overview Tokens Installing with OAuth Using token rotation Using PKCE Verifying requests from Slack Authorizing with Postman Binding accounts across services Sign in with Slack Block Kit Enterprise Enterprise Search for apps GovSlack Interactivity Messaging Slack Marketplace Surfaces Workflows Legacy 日本語版ページ Authentication On this page Auth"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://api.slack.com/authentication",
+              "snippet": "Authentication overview | Slack Developer Docs guide Skip to main content Guides Reference Samples Tools Changelog Dev Program MANAGE APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs App management App manifests Admin resources Authentication Overview Tokens Installing with OAuth Using token rotation Using PKCE Ve"
+            },
+            {
+              "claim": "surface",
+              "term": "sdk",
+              "url": "https://api.slack.com/authentication",
+              "snippet": "is limited to only the necessary data. Previous Using the Slack SCIM API Next Overview Copy as markdown Authentication basics Key concepts Reference . Tools Slack CLI Bolt frameworks Slack SDKs Block Kit Builder Developer program Code samples & tutorials LLM? Read llms.txt All tools Learn Learning paths Workshops Slack certifications Trailhead Resource library All learning resources Community Slack community Slack events Resources Docs Blog Slack marketplace Developer newsletter Manage Apps You"
+            },
+            {
+              "claim": "gating",
+              "term": "enterprise",
+              "url": "https://api.slack.com/authentication",
+              "snippet": "on Overview Tokens Installing with OAuth Using token rotation Using PKCE Verifying requests from Slack Authorizing with Postman Binding accounts across services Sign in with Slack Block Kit Enterprise Enterprise Search for apps GovSlack Interactivity Messaging Slack Marketplace Surfaces Workflows Legacy 日本語版ページ Authentication On this page Authentication overview Authentication is a critical part of the development process, but it doesn’t have to be daunting. With the right tools and best practic"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "WhatsApp Business",
+      "category": "Communications and Messaging",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "system user token"
+        ],
+        "credential_access": "paid_or_admin",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+          "status": 200,
+          "error": null,
+          "text_length": 15667,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+              "snippet": "vel\": \"STANDARD\" }, \"webhook_configuration\": { \"application\": \"https://www.luckyshrub.com/webhooks\" }, \"id\": \"106540352242922\" } ``` ### Authentication and authorization Authentication uses OAuth (not 2.0) access tokens, while permissions restrict access to specific resources. - [Learn more about access tokens.](https://developers.facebook.com/documentation/business-messaging/whatsapp/access-tokens) - [Learn more about permissions.](https://developers.facebook.com/documentation/business-messagin"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+              "snippet": "# About the WhatsApp Business Platform The WhatsApp Business Platform enables businesses to communicate with customers at scale. This documentation is intended for developers using our APIs. If you are looking for information on other ways to use WhatsApp for your business see the [WhatsApp Business site](https://business.whatsapp.com/). ## Core APIs and capabilities ### WhatsApp Business Platform Cloud API The WhatsApp Business Platform Cloud API enables you to program"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+              "snippet": "pplication\": \"https://www.luckyshrub.com/webhooks\" }, \"id\": \"106540352242922\" } ``` ### Authentication and authorization Authentication uses OAuth (not 2.0) access tokens, while permissions restrict access to specific resources. - [Learn more about access tokens.](https://developers.facebook.com/documentation/business-messaging/whatsapp/access-tokens) - [Learn more about permissions.](https://developers.facebook.com/documentation/business-messaging/whatsapp/permissions) ## Key resources ### Busi"
+            },
+            {
+              "claim": "gating",
+              "term": "approval",
+              "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+              "snippet": "atsapp/business-phone-numbers/phone-numbers) ### Message templates Templates are customizable messages that you can construct in advance of sending them. Template messages generally require approval before you can send them. Templates are useful for messaging at scale. They are also the only type of message that can be sent to WhatsApp users outside of a [customer service window](https://developers.facebook.com/documentation/business-messaging/whatsapp/messages/send-messages#customer-service-win"
+            }
+          ]
+        },
+        {
+          "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+          "status": 200,
+          "error": null,
+          "text_length": 16058,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+              "snippet": "ame that can appear in place of their number in the WhatsApp client Upon successful completion, Embedded Signup returns the customer's WABA ID, business phone number ID, and an exchangeable token code, to the window that spawned the flow. You must send this data to your server and use it in a server-to-server call to: * exchange the code for a customer-scoped business token * register the customer's business phone number for Cloud API use * subscribe your app to webhooks on the customer's WABA *"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+              "snippet": "# Embedded Signup **Warning:** **Embedded signup v2 will be deprecated on October 15, 2026.** Migrate your integration to [v4](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/version-4) before that date to avoid disruption. See [Versions](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/versions) for the full upgrade path. Embedded Signup is an authentication"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+              "snippet": "p/447934475640650). Business customers also have full access to [WhatsApp Manager](https://business.facebook.com/wa/manage/), which they can use to access their assets. Note that you cannot restrict this access in any way. Refer to the [list of available assets](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/version-4). ## Limitations ### Onboarding limits By default, you can onboard up to 10 new business customers in a rolling 7-day window. Only newly"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+              "snippet": "rrent onboarded customer count in the **WhatsApp Manager** > **Partner overview** panel. You will be notified by email if you approach this limit. If you complete Business Verification, App Review, and Access Verification, your limit is automatically increased to 200 new business customers in a rolling 7-day window. If you need to onboard more than 200 business customers per week, apply to become a [Meta Business Partner](https://business.whatsapp.com/partners/become-a-partner). **Note:** Existi"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "LinkedIn Ads",
+      "category": "Marketing, Ads, Email and Social",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+          "status": 200,
+          "error": null,
+          "text_length": 4095,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+              "snippet": "ia LinkedIn with engagement score, paid impressions, paid clicks, leads, organic impressions, and organic engagements. Overview Company Intelligence API Integration Requirements Support and Developer Resources These resources can help you stay on top of new features, developer portal access, migrations, and deprecations. Migrations Stay on top of breaking changes related to migration. Developer Portal Stay on top of the developer offerings though our portal. Developer Blog Stay on top of the lat"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+              "snippet": "loper Portal Stay on top of the developer offerings though our portal. Developer Blog Stay on top of the latest feature updates via available on our blog post. Support Refer to LinkedIn API Partner Support for how to reach Developer Support. en-us Your Privacy Choices Theme Light Dark High contrast AI Disclaimer Previous Versions Blog Contribute Privacy Consumer Health Privacy Terms of Use Trademarks © Microsoft 2026"
+            }
+          ]
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+          "status": 200,
+          "error": null,
+          "text_length": 4312,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+              "snippet": "Authenticating with OAuth 2.0 Overview - LinkedIn | Microsoft Learn Skip to main content Skip to Ask Learn chat experience This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Download Microsoft Edge More info about Internet Explorer and"
+            },
+            {
+              "claim": "access",
+              "term": "approval",
+              "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+              "snippet": "mber Authorization grants permissions to your application by a LinkedIn member to access the member’s resources on LinkedIn. Your application has no access to these resources without member approval. The Member Auth uses the 3-legged OAuth code flow. For step-by-step instructions on how to implement 3-legged OAuth, see Authorization Code Flow (3-legged OAuth) page. Tip When to use 3-legged OAuth Use this flow if you are requesting access to a member's account to use their data and make requests"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+              "snippet": "of permissions, descriptions and access details, refer to Getting Access to LinkedIn APIs page. Sample Application You can explore the OAuth Sample Applications that enables you to try out RESTful OAuth calls to the LinkedIn Authentication server. The sample app is available in Java. Additionally, you can also explore the Marketing Sample Application . Feedback Was this page helpful? Yes No No Need help with this topic? Want to try using Ask Learn to clarify or guide you through this topic? Ask"
+            },
+            {
+              "claim": "gating",
+              "term": "approval",
+              "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+              "snippet": "mber Authorization grants permissions to your application by a LinkedIn member to access the member’s resources on LinkedIn. Your application has no access to these resources without member approval. The Member Auth uses the 3-legged OAuth code flow. For step-by-step instructions on how to implement 3-legged OAuth, see Authorization Code Flow (3-legged OAuth) page. Tip When to use 3-legged OAuth Use this flow if you are requesting access to a member's account to use their data and make requests"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Klaviyo",
+      "category": "Marketing, Ads, Email and Social",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "private API key"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developers.klaviyo.com/en/reference/api_overview",
+          "status": 200,
+          "error": null,
+          "text_length": 9248,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://developers.klaviyo.com/en/reference/api_overview",
+              "snippet": "Client API Client Get Client Review Values Reports get Get Client Reviews get Create Client Review post Create Client Subscription post Get Client Geofences get Create or Update Client Push Token post Unregister Client Push Token post Create Client Event post Create or Update Client Profile post Bulk Create Client Events post Create Client Back In Stock Subscription post Conversations API Conversations API overview Conversations Create Conversation Message post Coupons API Coupons Get Coupons ge"
+            },
+            {
+              "claim": "surface",
+              "term": "api reference",
+              "url": "https://developers.klaviyo.com/en/reference/api_overview",
+              "snippet": "API overview Jump to Content Home Guides API Reference legacy v2022-10-17 v2023-01-24 v2023-02-22 v2023-06-15 v2023-07-15 v2023-08-15 v2023-09-15 v2023-10-15 v2023-12-15 v2024-02-15 v2024-05-15 v2024-06-15 v2024-07-15 v2024-10-15 v2025-01-15 v2025-04-15 v2025-07-15 v2025-10-15 v2026-01-15 v2026-04-15 Changelog Help Center Community Contact Us API Re"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.klaviyo.com/en/reference/api_overview",
+              "snippet": "lete Variants Jobs get Bulk Delete Catalog Variants post Get Bulk Delete Variants Job get Get Variants for Catalog Item get Get Variant IDs for Catalog Item get Client API Client Get Client Review Values Reports get Get Client Reviews get Create Client Review post Create Client Subscription post Get Client Geofences get Create or Update Client Push Token post Unregister Client Push Token post Create Client Event post Create or Update Client Profile post Bulk Create Client Events post Create Clie"
+            }
+          ]
+        },
+        {
+          "url": "https://developers.klaviyo.com/en/docs/authenticate_",
+          "status": 200,
+          "error": null,
+          "text_length": 118301,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.klaviyo.com/en/docs/authenticate_",
+              "snippet": "laviyo text messaging (SMS) Klaviyo Stripe Projects Agent Context PARTNER RESOURCES Join the Klaviyo ecosystem How your customers can use integrated data in Klaviyo Build your app Implement OAuth Create a public OAuth app Make API calls using OAuth Handle your app's OAuth flow Troubleshoot OAuth errors Update your OAuth scopes Branding for app metrics Submit flow templates for your app Get performance data for flows triggered by your app metrics Submit Customer Hub content block templates for yo"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.klaviyo.com/en/docs/authenticate_",
+              "snippet": "t Rate limits, status codes, and errors Klaviyo API ESSENTIALS Klaviyo's data model Klaviyo's architecture JSON:API feature guides Relationships Filtering Sorting Datetimes Sparse fieldsets Developer SDKS & Tools Web and Mobile SDKs Developer tools Generate sample data Monitor API usage Review API error alerts Use Klaviyo's Postman collections Klaviyo CLI Create an allowlist for your public API key Glossary index Klaviyo MCP server Klaviyo text messaging (SMS) Klaviyo Stripe Projects Agent Conte"
+            },
+            {
+              "claim": "surface",
+              "term": "webhook",
+              "url": "https://developers.klaviyo.com/en/docs/authenticate_",
+              "snippet": "Back in stock Sync a custom catalog feed to Klaviyo Enable back in stock for custom catalog feeds Set up back in stock via API Manage coupons with the Coupons API Personalize Messages Flow webhooks How to add a webhook action to a flow Understanding webhook status codes Add a custom action to a flow System webhooks Working with system webhooks Django for message design Message design overview Use filters to customize variables Use conditionals in messages Django filter glossary Use custom catal"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.klaviyo.com/en/docs/authenticate_",
+              "snippet": "itecture JSON:API feature guides Relationships Filtering Sorting Datetimes Sparse fieldsets Developer SDKS & Tools Web and Mobile SDKs Developer tools Generate sample data Monitor API usage Review API error alerts Use Klaviyo's Postman collections Klaviyo CLI Create an allowlist for your public API key Glossary index Klaviyo MCP server Klaviyo text messaging (SMS) Klaviyo Stripe Projects Agent Context PARTNER RESOURCES Join the Klaviyo ecosystem How your customers can use integrated data in Klav"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Shopify",
+      "category": "Ecommerce",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "access token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "GraphQL",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://shopify.dev/docs/api/admin-graphql",
+          "status": 200,
+          "error": null,
+          "text_length": 7300,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://shopify.dev/docs/api/admin-graphql",
+              "snippet": "done for you. Otherwise, you should include your token as a X-Shopify-Access-Token header on all GraphQL requests. Public and custom apps created in the Dev Dashboard generate tokens using OAuth , and custom apps made in the Shopify admin are authenticated in the Shopify admin . To keep the platform secure, apps need to request specific access scopes during the install process. Only request as much data access as your app needs to work. Learn more about getting started with authentication and b"
+            },
+            {
+              "claim": "access",
+              "term": "admin",
+              "url": "https://shopify.dev/docs/api/admin-graphql",
+              "snippet": "GraphQL Admin API reference Skip to main content Apps Storefronts Agents References Ask assistant / Help • Log in Collapse sidebar GraphQL Admin API Choose a version: unstable 2026-10 release candidate 2026-07 latest 2026-04 2026-01 2025-10 2026-07 latest Overview Client libraries Authentication Endpoints and queries"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://shopify.dev/docs/api/admin-graphql",
+              "snippet": "/2026-07/graphql.json Queries begin with one of the objects listed under QueryRoot . The QueryRoot is the schema’s entry-point for queries. Queries are equivalent to making a GET request in REST. The example shown is a query to get the ID and title of the first three products. Learn more about API usage . Note Explore and learn Shopify's Admin API using GraphiQL Explorer . To build queries and mutations with shop data, install Shopify’s GraphiQL app . Note: Explore and learn Shopify's Admin API"
+            }
+          ]
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+          "status": 200,
+          "error": null,
+          "text_length": 114389,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+              "snippet": "ion (recommended) Installation during authorization code grant Authorization code grant Admin-created custom app Installed upon generation in the Shopify admin Generate in the Shopify admin OAuth 2.0 is the industry-standard protocol for authorizing or giving permissions to apps. The following video illustrates how OAuth works at Shopify. Note that this video was created before token exchange was introduced, and might use the term \"OAuth\" interchangeably with \"authorization code grant.\" Anchor t"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+              "snippet": "ode library for interacting with the Admin API Was this page helpful? Yes No Authentication vs. authorization Types of authentication and authorization methods Getting started Tools Updates Developer changelog Shopify Editions Business growth Shopify Partners Program Shopify App Store Shopify Academy Legal Terms of service API terms of use Privacy policy Partners Program Agreement Shopify About Shopify Shopify Plus Careers Investors Press and media window.__reactRouterContext.streamController.en"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+              "snippet": "1404],{\\\"_32\\\":128,\\\"_34\\\":1436,\\\"_61\\\":1437},{\\\"_32\\\":1419,\\\"_34\\\":1420,\\\"_36\\\":51,\\\"_39\\\":1421},{\\\"_32\\\":1405,\\\"_34\\\":1406,\\\"_36\\\":51,\\\"_39\\\":1407},\\\"migrating\\\",\\\"Migrate to GraphQL from REST\\\",[1408,1409,1410],{\\\"_32\\\":128,\\\"_34\\\":1417,\\\"_61\\\":1418},{\\\"_32\\\":1414,\\\"_34\\\":1415,\\\"_61\\\":1416},{\\\"_32\\\":1411,\\\"_34\\\":1412,\\\"_61\\\":1413},\\\"libraries\\\",\\\"Update API calls in your app\\\",\\\"/docs/apps/build/graphql/migrate/libraries\\\",\\\"learn-how\\\",\\\"Learn how to migrate\\\",\\\"/docs/apps/build/graphql/migr"
+            },
+            {
+              "claim": "gating",
+              "term": "approval",
+              "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+              "snippet": "[334],{\\\"_32\\\":328,\\\"_34\\\":329,\\\"_61\\\":335},\\\"/docs/apps/build/payments/offsite/use-the-cli\\\",\\\"processing-overview\\\",\\\"About payment processing\\\",\\\"/docs/apps/build/payments/processing\\\",\\\"approval\\\",\\\"Get approved for payments\\\",\\\"/docs/apps/build/payments/payments-extension-review\\\",\\\"requirements\\\",\\\"Requirements for payments extensions\\\",\\\"/docs/apps/build/payments/requirements\\\",\\\"Payments extensions\\\",\\\"/docs/apps/build/payments\\\",\\\"orders_fulfillment\\\",\\\"Orders and fulfillment\\\",[350,351"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Amazon Selling Partner",
+      "category": "Ecommerce",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "AWS SigV4",
+          "LWA"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://developer-docs.amazon.com/sp-api/docs/",
+          "status": 200,
+          "error": null,
+          "text_length": 17353,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/",
+              "snippet": "cations Renew Authorizations Revoke Authorizations Authorization Limits Special Authorization Types Authorize your Application to Access Vendor Groups Authorization with the Restricted Data Token Integration Building Robust Amazon SP-API Applications SP-API SDKs Connect to the Selling Partner API Using a Generated C# SDK Connecting to the Selling Partner API Using a Generated Java SDK Tutorial: Automate your SP-API calls using C# SDK Tutorial: Automate your SP-API calls using Java SDK Tutorial:"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/",
+              "snippet": "Welcome to SP-API Documentation For AI agents: visit https://developer-docs.amazon/llms.txt for an index of all pages formatted in Markdown and endpoints in OpenAPI. Jump to Content Home Documentation Code Samples API Reference Announcements Models Release Notes FAQ GitHub Videos Default German (Germany) Spanish (Spain) French (France) Italian (Italy) Japanese (Japan)"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/",
+              "snippet": "ze Private Applications Renew Authorizations Revoke Authorizations Authorization Limits Special Authorization Types Authorize your Application to Access Vendor Groups Authorization with the Restricted Data Token Integration Building Robust Amazon SP-API Applications SP-API SDKs Connect to the Selling Partner API Using a Generated C# SDK Connecting to the Selling Partner API Using a Generated Java SDK Tutorial: Automate your SP-API calls using C# SDK Tutorial: Automate your SP-API calls using Jav"
+            },
+            {
+              "claim": "gating",
+              "term": "approval",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/",
+              "snippet": "Service Provider (Setup and Migration) Developer Registration Request Status Third-Party Provider Registration Third-Party Provider Signature Guidance Service Provider Registration and Role Approval Process Overview Website Guidelines for Public Developers and Service Providers User Permissions for Service Providers Register your Application Update your Application Information Rotate your Application's LWA Credentials LWA Credentials FAQ View your Application Information and Credentials Learn Ho"
+            }
+          ]
+        },
+        {
+          "url": "https://developer-docs.amazon.com/sp-api/docs/registering-your-application",
+          "status": 200,
+          "error": null,
+          "text_length": 17353,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/registering-your-application",
+              "snippet": "cations Renew Authorizations Revoke Authorizations Authorization Limits Special Authorization Types Authorize your Application to Access Vendor Groups Authorization with the Restricted Data Token Integration Building Robust Amazon SP-API Applications SP-API SDKs Connect to the Selling Partner API Using a Generated C# SDK Connecting to the Selling Partner API Using a Generated Java SDK Tutorial: Automate your SP-API calls using C# SDK Tutorial: Automate your SP-API calls using Java SDK Tutorial:"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/registering-your-application",
+              "snippet": "Register your Application For AI agents: visit https://developer-docs.amazon/llms.txt for an index of all pages formatted in Markdown and endpoints in OpenAPI. Jump to Content Home Documentation Code Samples API Reference Announcements Models Release Notes FAQ GitHub Videos Default German (Germany) Spanish (Spain) French (France) Italian (Italy) Japanese (Japan)"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/registering-your-application",
+              "snippet": "ze Private Applications Renew Authorizations Revoke Authorizations Authorization Limits Special Authorization Types Authorize your Application to Access Vendor Groups Authorization with the Restricted Data Token Integration Building Robust Amazon SP-API Applications SP-API SDKs Connect to the Selling Partner API Using a Generated C# SDK Connecting to the Selling Partner API Using a Generated Java SDK Tutorial: Automate your SP-API calls using C# SDK Tutorial: Automate your SP-API calls using Jav"
+            },
+            {
+              "claim": "gating",
+              "term": "approval",
+              "url": "https://developer-docs.amazon.com/sp-api/docs/registering-your-application",
+              "snippet": "Service Provider (Setup and Migration) Developer Registration Request Status Third-Party Provider Registration Third-Party Provider Signature Guidance Service Provider Registration and Role Approval Process Overview Website Guidelines for Public Developers and Service Providers User Permissions for Service Providers Register your Application Update your Application Information Rotate your Application's LWA Credentials LWA Credentials FAQ View your Application Information and Credentials Learn Ho"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "DataForSEO",
+      "category": "Data, SEO and Scraping",
+      "claimed": {
+        "auth_methods": [
+          "Basic",
+          "API key"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://docs.dataforseo.com/v3/",
+          "status": 200,
+          "error": null,
+          "text_length": 9381,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "sandbox",
+              "url": "https://docs.dataforseo.com/v3/",
+              "snippet": "Amazon Products Databases Google Play SERPs Database Listings Database App Store SERPs Database Listings Database Whois Domains Database Business Listings Database Appendix User Data Errors Sandbox ID List API Errors Tasks Fixed Webhook Resend Status AI-Optimized Response Introduction Welcome to DataForSEO API! This is the starting point on your journey towards building powerful SEO software, data analysis pipelines, and robust no-code automations. With DataForSEO you can get all the data you ne"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://docs.dataforseo.com/v3/",
+              "snippet": "k POST Tasks Ready Task GET Live Google Trends Overview Locations Languages Categories Explore Task POST Tasks Ready Task GET Live DataForSEO Trends Overview Locations Explore Subregion Interests Demography Merged Data Clickstream Data Overview Locations and Languages DataForSEO Search Volume Global Search Volume Bulk Search Volume Domain Analytics API Overview Technologies Overview Filters Locations Languages Technologies Aggregation Technologies Technologies Summary Technology Stats Domains by"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://docs.dataforseo.com/v3/",
+              "snippet": "sk POST Tasks Ready Task GET Advanced HTML Live Advanced HTML Google Shopping Overview Locations Languages Sellers Task POST Tasks Ready Task GET Product Info Task POST Tasks Ready Task GET Reviews Task POST Tasks Ready Task GET Products Task POST Tasks Ready Task GET Advanced HTML Sellers Ad URL App Data API Overview Google Overview Categories Locations Languages App Searches Task POST Tasks Ready Task GET Advanced HTML App List Task POST Tasks Ready Task GET Advanced HTML App Info Task POST Ta"
+            }
+          ]
+        },
+        {
+          "url": "https://docs.dataforseo.com/v3/appendix-user-data-and-limits/",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Waterfall.io",
+      "category": "Data, SEO and Scraping",
+      "claimed": {
+        "auth_methods": [
+          "API key"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://www.waterfall.io/",
+          "status": 200,
+          "error": null,
+          "text_length": 8007,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://www.waterfall.io/",
+              "snippet": "se, \"limit\": 50 }' View API doc Contact Enrichment API API Overview Modular & Scalable GTM API Everything you need to build reliable data pipelines - from flexible architecture to dedicated developer support Book a Call Unified data schema One clean, consistent data format for all your contacts and target accounts. No more field mapping headaches or schema changes. High rate limits Unlike typical waterfall enrichment vendors who struggle with rate limits, we handle high volumes seamlessly - whet"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://www.waterfall.io/",
+              "snippet": "rack Champions Monitor your best customers in their new positions Match Emails to Business Profiles Turn emails into complete business profiles - ready for scoring, segmenting and outreach Preview curl --location 'https://api.waterfall.io/v1/prospector' \\ --header 'Content-Type: application/json' \\ --header 'x-waterfall-api-key: YOURKEY' \\ --data '{ \"domain\": \"stripe.com\", \"title_filter\": \"(marketing director)\", \"verified_only\":false, \"limit\": 50 }' View API doc Prospector API Preview curl --loc"
+            }
+          ]
+        },
+        {
+          "url": "https://docs.waterfall.io/",
+          "status": 200,
+          "error": null,
+          "text_length": 3918,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "api key",
+              "url": "https://docs.waterfall.io/",
+              "snippet": "any Reveal Finder Company Titles Beta POST Company Titles Launcher GET Company Titles Finder Email Verification POST Email Verifier Webhooks GET Webhook JWKS Account GET Account Reporter v2 API Keys Management GET API Keys - List POST API Keys - Create PUT API Keys - Modify Support Open API Specification Get API & Sales Support On this page Endpoints General guidance Introduction Copy page Complete API reference for Waterfall — find and enrich contacts, prospect by title and company, verify emai"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://docs.waterfall.io/",
+              "snippet": "count and key level. API Key Management Sync Create and manage sub-keys under a master key. Authentication Next ⌘ I linkedin Powered by This documentation is built and hosted on Mintlify, a developer documentation platform self.__next_f.push([1,\"56:I[604780,[\\\"/mintlify-assets/_next/static/chunks/39ae7a72da9a1903.js?dpl=dpl_8kw12Aqx86gNzGo6z6HUBafoUeAr\\\",\\\"/mintlify-assets/_next/static/chunks/b664fc8bb1e7ab0d.js?dpl=dpl_8kw12Aqx86gNzGo6z6HUBafoUeAr\\\",\\\"/mintlify-assets/_next/static/chunks/945ae7"
+            },
+            {
+              "claim": "surface",
+              "term": "webhook",
+              "url": "https://docs.waterfall.io/",
+              "snippet": "terfall.io API Documentation home page Search... ⌘ K Support Search... Navigation General guidance Introduction General guidance Introduction Authentication Rate limit Errors Usage Tracking Webhook Verification Prospector POST Prospector Launcher GET Prospector Finder Launcher guides Search Contact POST Search Contact Launcher GET Search Contact Finder Launcher guides Search Company POST Search Company Launcher GET Search Company Finder Contact Enrichment POST Contact Enrichment Launcher GET Con"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "GitHub",
+      "category": "Developer, Infra and Data platforms",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "GitHub App",
+          "PAT"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "GraphQL",
+          "Webhooks",
+          "MCP"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "official"
+      },
+      "sources": [
+        {
+          "url": "https://docs.github.com/en/rest",
+          "status": 200,
+          "error": null,
+          "text_length": 21393,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://docs.github.com/en/rest",
+              "snippet": "Workflow runs Workflows Activity Events Feeds Notifications Starring Watching Agent tasks Agent tasks REST endpoints for agents Secrets Variables Apps GitHub Apps Installations Marketplace OAuth authorizations Webhooks Billing Budgets Billing usage Branches Branches Protected branches Campaigns Security campaigns Checks Check runs Check suites Classroom Classroom Code quality Code quality Code scanning Code scanning Code security settings Configurations Codes of conduct Codes of conduct Codespa"
+            },
+            {
+              "claim": "access",
+              "term": "admin",
+              "url": "https://docs.github.com/en/rest",
+              "snippet": "te to the REST API to access more endpoints and have a higher rate limit. Learn about the REST API Best practices for using the REST API Follow these best practices when using GitHub's API. Administer enterprises and billing Billing usage Use the REST API to get billing usage information. Learn about the REST API Breaking changes Learn about breaking changes that were introduced in each REST API version. Administer enterprises and billing Budgets Use the REST API to get budget information. Build"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://docs.github.com/en/rest",
+              "snippet": "GitHub REST API documentation - GitHub Docs Skip to main content GitHub Docs Version: Free, Pro, & Team Search or ask Copilot Search or ask Copilot Select language: current language is English Search or ask Copilot Search or ask Copilot Open menu Open Sidebar REST API Home REST API API Version: 2026-03-10 (latest) Q"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://docs.github.com/en/rest",
+              "snippet": "ot usage metrics Copilot user management Copilot Spaces Collaborators Copilot Spaces Resources Credentials Revocation Dependabot Alerts Repository access Secrets Dependency graph Dependency review Dependency submission Software bill of materials (SBOM) Deploy keys Deploy keys Deployments Deployment branch policies Deployments Environments Protection rules Deployment statuses Emojis Emojis Enterprise teams Enterprise team members Enterprise team organizations Enterprise teams Gists Gists Comments"
+            }
+          ]
+        },
+        {
+          "url": "https://github.com/github/github-mcp-server",
+          "status": 200,
+          "error": null,
+          "text_length": 67192,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://github.com/github/github-mcp-server",
+              "snippet": "com/updates/v1_101\\\" rel=\\\"nofollow\\\"\\u003eVS Code 1.101\\u003c/a\\u003e or \\u003ca href=\\\"https://code.visualstudio.com/updates\\\" rel=\\\"nofollow\\\"\\u003elater\\u003c/a\\u003e for remote MCP and OAuth support.\\u003c/p\\u003e\\n\\u003cp dir=\\\"auto\\\"\\u003eAlternatively, to manually configure VS Code, choose the appropriate JSON block from the examples below and add it to your host configuration:\\u003c/p\\u003e\\n\\u003cmarkdown-accessiblity-table\\u003e\\u003ctable\\u003e\\n\\u003ctbody\\u003e\\u003ctr\\u003e\\u003ct"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://github.com/github/github-mcp-server",
+              "snippet": "Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://github.com/github/github-mcp-server",
+              "snippet": "ommit\\u003c/strong\\u003e: Keep tokens out of version control\\u003c/p\\u003e\\n\\u003c/li\\u003e\\n\\u003cli\\u003e\\n\\u003cp dir=\\\"auto\\\"\\u003e\\u003cstrong\\u003eFile permissions\\u003c/strong\\u003e: Restrict access to config files containing tokens\\u003c/p\\u003e\\n\\u003cdiv class=\\\"highlight highlight-source-shell notranslate position-relative overflow-auto\\\" dir=\\\"auto\\\" data-snippet-clipboard-copy-content=\\\"chmod 600 ~/.your-app/config.json\\\"\\u003e\\u003cpre\\u003echmod 600 \\u003cspan class=\\\"pl-k\\\"\\u003e"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://github.com/github/github-mcp-server",
+              "snippet": "ct agents from issue to merge MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features Solutions BY COMPANY SIZE Enterprises S"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Cloudflare",
+      "category": "Developer, Infra and Data platforms",
+      "claimed": {
+        "auth_methods": [
+          "API token",
+          "API key",
+          "OAuth2"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "GraphQL",
+          "MCP"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "official"
+      },
+      "sources": [
+        {
+          "url": "https://developers.cloudflare.com/api/",
+          "status": 200,
+          "error": null,
+          "text_length": 7236,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.cloudflare.com/api/",
+              "snippet": "emove User Group Member SSO SSO Get all SSO connectors Get single SSO connector Initialize new SSO connector Update SSO connector state Delete SSO connector Begin SSO connector verification OAuth Clients OAuth Clients List OAuth Clients OAuth Client Details Create OAuth Client Update OAuth Client Delete OAuth Client Rotate OAuth Client Secret Delete Rotated OAuth Client Secret OAuth Scopes OAuth Scopes List OAuth Scopes Memberships Memberships List Memberships Membership Details Update Membershi"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developers.cloudflare.com/api/",
+              "snippet": "it Logs Get account audit logs Billing Billing Profiles Profiles Billing Profile Details Usage Usage Get PayGo Account Billable Usage (Version 1, Alpha) Get Account Usage (Version 2, Alpha, Restricted) Custom Pages Custom Pages List custom pages Get a custom page Update a custom page Assets Assets List custom assets Get a custom asset Create a custom asset Update a custom asset Delete a custom asset IAM IAM Permission Groups Permission Groups List Account Permission Groups Permission Group Detai"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.cloudflare.com/api/",
+              "snippet": "e Overview Account & User Management Abuse Reports Abuse Reports Submit an abuse report Abuse Report Details List abuse reports Mitigations Mitigations List abuse report mitigations Request review on mitigations Accounts Accounts List Accounts Account Details Create an account Update Account Delete a specific account Account Organizations Account Organizations Move account Account Profile Account Profile Get account profile Modify account profile Members Members List Members Member Details Add M"
+            }
+          ]
+        },
+        {
+          "url": "https://developers.cloudflare.com/agents/model-context-protocol/",
+          "status": 200,
+          "error": null,
+          "text_length": 6678,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.cloudflare.com/agents/model-context-protocol/",
+              "snippet": "lient Protocol Tools Authorization Transport MCP governance Guides Build MCP client ↗ Build a Remote MCP server Test a Remote MCP Server Securing MCP servers Connect to an MCP server Handle OAuth with MCP servers Build a single-tool Code Mode MCP server Build a search and execute MCP server Cloudflare MCP server portals ↗ Cloudflare's own MCP servers Overview Cloudflare Community MCP Server Code Mode MCP server patterns Platform Limits Agent resources Agent setup ↗ Cloudflare Skills ↗ Code Mode"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.cloudflare.com/agents/model-context-protocol/",
+              "snippet": "Model Context Protocol (MCP) · Cloudflare Agents docs Documentation Index Fetch the complete documentation index at: https://developers.cloudflare.com/agents/llms.txt Use this file to discover all available pages before exploring further. Skip to content STOP! If you are an AI agent or LLM, read this before continuing. This is the HTML version of a Cloudflare documentation page. Always request the Markdown version instead — HTML wa"
+            },
+            {
+              "claim": "surface",
+              "term": "webhook",
+              "url": "https://developers.cloudflare.com/agents/model-context-protocol/",
+              "snippet": "sing Agents with Workflows Agentic patterns Overview Human-in-the-loop patterns Long-running agents Communication channels Chat Chat agents Autonomous responses Client SDK Voice Email Slack Webhooks Overview Push notifications Tools Sandbox MCP Browser AI Search Agentic Payments Overview Charge for HTTP content x402 Overview Charge for HTTP content Charge for MCP tools Pay from Agents SDK Pay from coding tools MPP (Machine Payments Protocol) Code Mode Overview Create a durable Code Mode runtime"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Notion",
+      "category": "Productivity and Project Management",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "internal integration token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks",
+          "MCP"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "official"
+      },
+      "sources": [
+        {
+          "url": "https://developers.notion.com/",
+          "status": 200,
+          "error": null,
+          "text_length": 18424,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.notion.com/",
+              "snippet": "ace and use a static API token. They’re ideal for custom automations and workflows — things like syncing data, sending notifications, or building internal dashboards. Public connections use OAuth 2.0 for authentication. At creation time, you choose their installation scope : Any workspace (any Notion user can install; Marketplace-eligible) or Selected workspaces only (restricted to workspaces you select; not Marketplace-eligible). Personal access tokens (PATs) are user-scoped tokens for scripts,"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.notion.com/",
+              "snippet": "plete documentation index at: /llms.txt Use this file to discover all available pages before exploring further. Skip to main content Notion Docs home page Search... ⌘ K Ask Assistant Log in Developer portal Developer portal Search... Navigation Get started Overview Guides API Reference CLI Reference Workers Admin API Changelog Examples Get started Overview Quickstart Personal access tokens Internal connections Public connections Authorization Handling API keys Preparing for users List on the Mar"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developers.notion.com/",
+              "snippet": "when to use each type, and what you can build. Copy page ​ Using Notion API Notion connections let you connect your workspace to external tools and automate workflows through code. With the REST API, you can read, create, and update nearly everything in a workspace — pages, databases, users, comments, and more. When you create a connection, you define what it can do: which API endpoints it can call, what content it can read or write, and how it authenticates. Each connection gets its own credent"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.notion.com/",
+              "snippet": "iews Working with comments Working with markdown content Working with files and media Resources Example code Postman workspace Historical changelog Compliance Overview Event reference Link previews Introduction On this page Using Notion API What is a Notion connection? Connection types Comparison Shared concepts Capabilities Content access Webhooks Getting started Resources Get started Overview Copy page Discover what Notion connections are, when to use each type, and what you can build. Copy pa"
+            }
+          ]
+        },
+        {
+          "url": "https://developers.notion.com/docs/authorization",
+          "status": 200,
+          "error": null,
+          "text_length": 16353,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.notion.com/docs/authorization",
+              "snippet": "granting a connection or token access to Notion data. Internal connections use a static API token, personal access tokens use a user-scoped static API token, and public connections use the OAuth 2.0 protocol. ​ Internal connection auth flow set-up To use an internal connection, start by creating your connection in the Developer portal . The internal connection will be associated with the workspace of your choice. You are required to be a workspace owner to create a connection. Once the connecti"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.notion.com/docs/authorization",
+              "snippet": "plete documentation index at: /llms.txt Use this file to discover all available pages before exploring further. Skip to main content Notion Docs home page Search... ⌘ K Ask Assistant Log in Developer portal Developer portal Search... Navigation Get started Authorization Guides API Reference CLI Reference Workers Admin API Changelog Examples Get started Overview Quickstart Personal access tokens Internal connections Public connections Authorization Handling API keys Preparing for users List on th"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developers.notion.com/docs/authorization",
+              "snippet": "created, you can update its settings as needed under the Configuration tab and retrieve the installation access token in this tab. The installation access token will be used to authenticate REST API requests. The connection sends the same token in every API request. ​ Connection permissions Before a connection can interact with your Notion workspace page(s), the page must be manually shared with the connection. To share a page with a connection, visit the page in your Notion workspace, click the"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.notion.com/docs/authorization",
+              "snippet": "iews Working with comments Working with markdown content Working with files and media Resources Example code Postman workspace Historical changelog Compliance Overview Event reference Link previews Introduction On this page What is authorization? Internal connection auth flow set-up Connection permissions Making API requests with an internal connection Personal access token auth flow set-up Public connection auth flow set-up How to make a public connection Public connection authorization overvie"
+            }
+          ]
+        },
+        {
+          "url": "https://developers.notion.com/docs/mcp",
+          "status": 200,
+          "error": null,
+          "text_length": 4413,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developers.notion.com/docs/mcp",
+              "snippet": "Notion workspace. It’s designed to work seamlessly with popular AI assistants like Claude Code, Cursor, VS Code, ChatGPT, and more. ​ Why use Notion MCP? Easy setup — Connect through simple OAuth, with one-click installation for supported AI tools Full workspace access — AI tools can read and write to your Notion pages just like you can Optimized for AI — Built specifically for AI agents with efficient data formatting ​ What can you do with Notion MCP? Create documentation — Generate PRDs, tech"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developers.notion.com/docs/mcp",
+              "snippet": "plete documentation index at: /llms.txt Use this file to discover all available pages before exploring further. Skip to main content Notion Docs home page Search... ⌘ K Ask Assistant Log in Developer portal Developer portal Search... Navigation Notion MCP Notion MCP Guides API Reference CLI Reference Workers Admin API Changelog Examples Get started Overview Quickstart Personal access tokens Internal connections Public connections Authorization Handling API keys Preparing for users List on the Ma"
+            },
+            {
+              "claim": "surface",
+              "term": "api reference",
+              "url": "https://developers.notion.com/docs/mcp",
+              "snippet": "s before exploring further. Skip to main content Notion Docs home page Search... ⌘ K Ask Assistant Log in Developer portal Developer portal Search... Navigation Notion MCP Notion MCP Guides API Reference CLI Reference Workers Admin API Changelog Examples Get started Overview Quickstart Personal access tokens Internal connections Public connections Authorization Handling API keys Preparing for users List on the Marketplace Agent APIs Notion MCP Overview Connecting to Notion MCP Supported tools Se"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developers.notion.com/docs/mcp",
+              "snippet": "iews Working with comments Working with markdown content Working with files and media Resources Example code Postman workspace Historical changelog Compliance Overview Event reference Link previews Introduction On this page What is Notion MCP? Why use Notion MCP? What can you do with Notion MCP? Notion MCP Notion MCP Copy page Learn how to connect AI agents to your Notion workspace. Copy page Connect your AI tools to Notion using the Model Context Protocol (MCP) , an open standard that lets AI a"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 3,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Monday.com",
+      "category": "Productivity and Project Management",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "API token"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "GraphQL",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://developer.monday.com/api-reference/docs",
+          "status": 200,
+          "error": null,
+          "text_length": 150722,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developer.monday.com/api-reference/docs",
+              "snippet": "utilize the monday.com API. Admins and members have access to their own API tokens . Guests cannot access an API key but can utilize API features through other authentication methods, like OAuth or a shortLivedToken. Viewers , users who have been deactivated or disabled, users with unconfirmed emails, or users on student accounts cannot access the API. What monday products does the API support? The platform API currently supports the monday work management, dev, sales CRM, and service products."
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer.monday.com/api-reference/docs",
+              "snippet": "The basics For AI agents: visit https://developer.monday.com/llms.txt for an index of all pages formatted in Markdown and endpoints in OpenAPI. Jump to Content Home Guides API Reference Changelog Build with AI Playground Apps Docs Community Need Help? Guides Apps Docs Community Need Help? Home Guides API Reference Changelog Build with AI Playground"
+            },
+            {
+              "claim": "surface",
+              "term": "graphql",
+              "url": "https://developer.monday.com/api-reference/docs",
+              "snippet": "tform MCP) Get Notetaker Meetings (Platform MCP) Get Sprints Boards (Platform MCP) Get Sprints Metadata (Platform MCP) Get Sprint Summary (Platform MCP) Execute API Query (Platform MCP) Get GraphQL Schema (Platform MCP) Get Type Details (Platform MCP) Show Table (Platform MCP UI) Show Chart (Platform MCP UI) Show Battery (Platform MCP UI) Show Assign (Platform MCP UI) Platform MCP security Guides GraphQL overview Making your first request Querying board items Working with multi-level boards Chan"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developer.monday.com/api-reference/docs",
+              "snippet": "dashDomain\":\"dash.readme.com\",\"domain\":\"readme.io\",\"domainFull\":\"https://dash.readme.com\",\"encryptedLocalStorageKey\":\"ekfls-2025-03-27\",\"fullstory\":{\"enabled\":true,\"orgId\":\"FSV9A\"},\"git\":{\"preview\":\"https://githug-prod.gitto.rdme.io\",\"sync\":{\"bitbucket\":{\"installationLink\":\"https://developer.atlassian.com/console/install/310151e6-ca1a-4a44-9af6-1b523fea0561?signature=AYABeMn9vqFkrg%2F1DrJAQxSyVf4AAAADAAdhd3Mta21zAEthcm46YXdzOmttczp1cy13ZXN0LTI6NzA5NTg3ODM1MjQzOmtleS83MDVlZDY3MC1mNTdjLTQxYjUtOWY5"
+            }
+          ]
+        },
+        {
+          "url": "https://developer.monday.com/api-reference/docs/authentication",
+          "status": 200,
+          "error": null,
+          "text_length": 152597,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://developer.monday.com/api-reference/docs/authentication",
+              "snippet": "tain workspace via the UI, you won't have permission using your personal API token either.\\n\\nApp tokens have an additional [set of permission scopes](https://developer.monday.com/apps/docs/oauth#set-up-permission-scopes) that specify which queries and mutations it can access, while personal tokens have all permission scopes.\\n\\n# Accessing your token\\n\\nYou can access your API token in two ways, depending on your [user type](https://support.monday.com/hc/en-us/articles/360002144900-User-types-e"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer.monday.com/api-reference/docs/authentication",
+              "snippet": "Authentication For AI agents: visit https://developer.monday.com/llms.txt for an index of all pages formatted in Markdown and endpoints in OpenAPI. Jump to Content Home Guides API Reference Changelog Build with AI Playground Apps Docs Community Need Help? Guides Apps Docs Community Need Help? Home Guides API Reference Changelog Build with AI Playground"
+            },
+            {
+              "claim": "surface",
+              "term": "graphql",
+              "url": "https://developer.monday.com/api-reference/docs/authentication",
+              "snippet": "tform MCP) Get Notetaker Meetings (Platform MCP) Get Sprints Boards (Platform MCP) Get Sprints Metadata (Platform MCP) Get Sprint Summary (Platform MCP) Execute API Query (Platform MCP) Get GraphQL Schema (Platform MCP) Get Type Details (Platform MCP) Show Table (Platform MCP UI) Show Chart (Platform MCP UI) Show Battery (Platform MCP UI) Show Assign (Platform MCP UI) Platform MCP security Guides GraphQL overview Making your first request Querying board items Working with multi-level boards Chan"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://developer.monday.com/api-reference/docs/authentication",
+              "snippet": "dashDomain\":\"dash.readme.com\",\"domain\":\"readme.io\",\"domainFull\":\"https://dash.readme.com\",\"encryptedLocalStorageKey\":\"ekfls-2025-03-27\",\"fullstory\":{\"enabled\":true,\"orgId\":\"FSV9A\"},\"git\":{\"preview\":\"https://githug-prod.gitto.rdme.io\",\"sync\":{\"bitbucket\":{\"installationLink\":\"https://developer.atlassian.com/console/install/310151e6-ca1a-4a44-9af6-1b523fea0561?signature=AYABeMn9vqFkrg%2F1DrJAQxSyVf4AAAADAAdhd3Mta21zAEthcm46YXdzOmttczp1cy13ZXN0LTI6NzA5NTg3ODM1MjQzOmtleS83MDVlZDY3MC1mNTdjLTQxYjUtOWY5"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Stripe",
+      "category": "Finance and Fintech",
+      "claimed": {
+        "auth_methods": [
+          "API key",
+          "OAuth2"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks",
+          "SDK",
+          "MCP"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "official"
+      },
+      "sources": [
+        {
+          "url": "https://stripe.com/docs/api",
+          "status": 200,
+          "error": null,
+          "text_length": 1757,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://stripe.com/docs/api",
+              "snippet": "ng Responses Idempotent requests Include-dependent response values (API v2) Metadata Pagination Request IDs Connected Accounts Versioning Core Resources Accounts v2 Account Links v2 Account Tokens v2 Balance Balance Transactions Charges Customers Customer Session Disputes Events Events v2 Event Destinations v2 Files File Links Mandates Payment Intents Persons v2 Person Tokens v2 Setup Intents Setup Attempts Stripe Balance Debit Agreement Payouts Refunds Confirmation Token Tokens Payment Methods"
+            },
+            {
+              "claim": "surface",
+              "term": "api reference",
+              "url": "https://stripe.com/docs/api",
+              "snippet": "Stripe API Reference Find anything / Ask AI Introduction Authentication Errors Expanding Responses Idempotent requests Include-dependent response values (API v2) Metadata Pagination Request IDs Connected Accounts Versioning Core Resources Accounts v2 Account Links v2 Account Tokens v2 Balance Balance Transactions Ch"
+            }
+          ]
+        },
+        {
+          "url": "https://docs.stripe.com/stripe-agent-toolkit",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Paygent Connect",
+      "category": "Finance and Fintech",
+      "claimed": {
+        "auth_methods": [
+          "API key",
+          "token"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://www.nmi.com/",
+          "status": 200,
+          "error": null,
+          "text_length": 79546,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://www.nmi.com/",
+              "snippet": "aaS Platforms Build, integrate, and scale payments Banks Help your merchants compete Payment Facilitators Reduce onboarding friction Industry Verticals Payments solutions for your customers Developers Integration Portal Start building in our Sandbox Documentation The resources you need to build SDKs + APIs Easy-to-use SDKs and APIs Processors & Devices Pre-certified for easy integration Security Transact safely, with confidence Resources Payments 101 Understanding the world of payments Case Stud"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://www.nmi.com/",
+              "snippet": "alk to Our Team It’s time to unlock your full growth potential, innovate fearlessly and thrive as an organization with the embedded payments solutions we deliver. Invalid number Product Interest* Payment gateway NMI Payments Merchant Management Unattended/Vending Business Type* Software/SaaS Company ISO - Wholesale ISO - Retail Unattended/Manufacturer/Kiosk Bank Merchant/Retailer None of the above Company Email Submit By submitting your information, you agree to NMI's Privacy Policy & Terms and"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://www.nmi.com/",
+              "snippet": "o-use SDKs and APIs Processors & Devices Pre-certified for easy integration Security Transact safely, with confidence Resources Payments 101 Understanding the world of payments Case Studies Partner stories of growth and success eBooks Quick reads, big insights Podcasts Conversations shaping the future of payments Whitepapers In-depth research and resources Webinars Deep dive into key trends with industry leading experts Analyst Reports Third party market insights Blog About Us Who we are See how"
+            }
+          ]
+        },
+        {
+          "url": "https://www.paygent.co.jp/",
+          "status": 200,
+          "error": null,
+          "text_length": 3035,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "paid",
+              "url": "https://www.paygent.co.jp/",
+              "snippet": "な利用方法 ③ 締日から最短で5営業日で入金 ④ 効率的・安全な売上・情報管理 ⑤ 優れた技術力と安定した経営基盤 対応 決済サービス クレジットカード決済 コンビニ決済 PayPay d払い（オンライン決済） au PAY（ネット支払い） 楽天ペイ(オンライン決済) Amazon Pay ATM決済（ペイジー） 銀行ネット決済 （ネットバンキング） 口座振替（ワイドネット） Paidy（後払い決済） NP後払い 安全性・ サポート カード情報の非保持化 業界グローバル基準のセキュリティ管理 迅速・きめ細やかなサポート体制 ご契約済の加盟店様へのサポート 導入事例 決済代行 支払い代行 Adaptis Adaptis In-Store | 店舗決済 Adaptis e-Commerce | オンライン決済 Adaptis Financing | キャッシュフロー改善 Adaptis Enterprise | BtoB決済 Adaptis Bill Payment | 収納代行 Adaptis VAS（Value-Added Services）| 付加価値サービス お問い合わせ ニュース"
+            },
+            {
+              "claim": "gating",
+              "term": "enterprise",
+              "url": "https://www.paygent.co.jp/",
+              "snippet": "い 安全性・ サポート カード情報の非保持化 業界グローバル基準のセキュリティ管理 迅速・きめ細やかなサポート体制 ご契約済の加盟店様へのサポート 導入事例 決済代行 支払い代行 Adaptis Adaptis In-Store | 店舗決済 Adaptis e-Commerce | オンライン決済 Adaptis Financing | キャッシュフロー改善 Adaptis Enterprise | BtoB決済 Adaptis Bill Payment | 収納代行 Adaptis VAS（Value-Added Services）| 付加価値サービス お問い合わせ ニュース ご契約済の加盟店様へ 会社概要 採用情報 サイトマップ 資料請求 対応決済サービス一覧 ECパッケージ対応済一覧 ペイジェントで対応しているサービス クレジットカード決済 クレジットカード決済 銀行ネット決済（ネットバンキング） 銀行ネット決済 （ネットバンキング） スマートフォンキャリア決済 キャリア決済 銀行振込（仮想口座方式） 銀行振込 （仮想口座方式） 口座振替 口座振替 コンビニ決済 コンビニ決済"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "NotebookLM",
+      "category": "AI, Research and Media-native",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "API key",
+          "service account"
+        ],
+        "credential_access": "paid_or_admin",
+        "api_surface": [
+          "REST",
+          "SDK"
+        ],
+        "buildability": "poor_fit",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference",
+          "status": 200,
+          "error": null,
+          "text_length": 13449,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference",
+              "snippet": "ython Go Java Node.js C# Agent Platform SDK Introduction Install the SDK for Python Python Go Java Node.js C# Agent Platform in express mode Express mode REST API reference v1 Overview countTokens generateContent streamGenerateContent v1beta1 Overview countTokens generateContent streamGenerateContent REST API reference All methods v1 REST Resources media Overview upload operations Overview cancel delete get list wait projects.locations Overview askContexts asyncRetrieveContexts augmentPrompt cor"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference",
+              "snippet": "braries Google Gen AI SDK Overview Python Go Java Node.js C# Agent Platform SDK Introduction Install the SDK for Python Python Go Java Node.js C# Agent Platform in express mode Express mode REST API reference v1 Overview countTokens generateContent streamGenerateContent v1beta1 Overview countTokens generateContent streamGenerateContent REST API reference All methods v1 REST Resources media Overview upload operations Overview cancel delete get list wait projects.locations Overview askContexts asy"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference",
+              "snippet": "e delete get list patch projects.locations.featureOnlineStores Overview create delete get getIamPolicy list patch setIamPolicy testIamPermissions projects.locations.featureOnlineStores.featureViews Overview create delete directWrite fetchFeatureValues generateFetchAccessToken get getIamPolicy list patch searchNearestEntities setIamPolicy sync testIamPermissions projects.locations.featureOnlineStores.featureViews.featureViewSyncs Overview get list projects.locations.featurestores Overview batchRe"
+            }
+          ]
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs",
+          "status": 200,
+          "error": null,
+          "text_length": 6917,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://ai.google.dev/gemini-api/docs",
+              "snippet": "d Android Apps Deploying your app Agents in AI Studio Playground Try out LearnLM Troubleshooting Access for Workspace users Google Cloud Platform Gemini Enterprise Agent Platform Gemini API OAuth authentication Policies Terms of service Available regions Abuse monitoring Feedback information The Interactions API is now generally available. We recommend using this API for access to all the latest features and models. Home Gemini API Docs Gemini API The Interactions API is our simplest and best wa"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://ai.google.dev/gemini-api/docs",
+              "snippet": "Gemini API | Google AI for Developers Skip to main content / English Deutsch Español – América Latina Français Indonesia Italiano Polski Português – Brasil Shqip Tiếng Việt Türkçe Русский עברית العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 – 简体 中文 – 繁體 日本語 한국어 Get API key Cookbook Community Sign in Docs API reference Gemini API Docs API refe"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://ai.google.dev/gemini-api/docs",
+              "snippet": "I ({}); const interaction = await ai . interactions . create ({ model : \"gemini-3.5-flash\" , input : \"Explain how AI works in a few words\" , }); console . log ( interaction . output_text ); REST curl -X POST \"https://generativelanguage.googleapis.com/v1beta/interactions\" \\ -H \"x-goog-api-key: $GEMINI_API_KEY \" \\ -H 'Content-Type: application/json' \\ -d '{ \"model\": \"gemini-3.5-flash\", \"input\": \"Explain how AI works in a few words\" }' Start building Follow our Quickstart guide to get an API key an"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://ai.google.dev/gemini-api/docs",
+              "snippet": "Resources Release notes Deprecations Migration Migrate to Gen AI SDK Migrate to Interactions API Interactions breaking changes (May 2026) Rate limits Billing info API troubleshooting Status Partner and library integrations Google AI Studio Quickstart Vibe code in Build mode Developing Full-Stack Apps Build Android Apps Deploying your app Agents in AI Studio Playground Try out LearnLM Troubleshooting Access for Workspace users Google Cloud Platform Gemini Enterprise Agent Platform Gemini API OAut"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Otter AI",
+      "category": "AI, Research and Media-native",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "MCP auth"
+        ],
+        "credential_access": "paid_or_admin",
+        "api_surface": [
+          "MCP",
+          "REST"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "official"
+      },
+      "sources": [
+        {
+          "url": "https://help.otter.ai/hc/en-us",
+          "status": 200,
+          "error": null,
+          "text_length": 2521,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "admin",
+              "url": "https://help.otter.ai/hc/en-us",
+              "snippet": "lly add Otter Notetaker to your meetings Manage your Otter Notetaker settings Stop Otter Notetaker from automatically joining your meetings 🚀 Otter.ai Enterprise Onboarding Guide Enterprise Admin Controls Overview Otter HubSpot for Enterprise Otter Salesforce for Enterprise HIPAA | Otter.ai Workspace Overview Otter Workspace Admin Guide Invite members to join your Workspace Managing your Workspace trial members Understanding how seats (licenses) work Zapier <> Otter.ai Integration Connect Salesf"
+            },
+            {
+              "claim": "gating",
+              "term": "enterprise",
+              "url": "https://help.otter.ai/hc/en-us",
+              "snippet": "er From recording to creating groups, learn how Otter works from top to bottom. Meeting settings & recordings Learn about managing your settings and features for your online meetings. Otter Enterprise Learn how to use and manage Otter Enterprise features. Otter Workspaces Learn how to manage your team in Otter. Integrations Connect, simplify, and automate. Discover the power of apps. Account settings & billing Adjust your settings and manage your billing in Otter. Announcements ✨ Tips & shortcut"
+            }
+          ]
+        },
+        {
+          "url": "https://help.otter.ai/hc/en-us/articles/40093383200919-Otter-MCP-Server",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating"
+        ],
+        "missing_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "DealCloud",
+      "category": "CRM and Sales",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "token"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://api.docs.dealcloud.com/",
+          "status": 200,
+          "error": null,
+          "text_length": 1808,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "api key",
+              "url": "https://api.docs.dealcloud.com/",
+              "snippet": "ation - DealCloud API Docs 🚀 New: DealCloud MCP Server — client preview starting July 2026 Feedback Feedback (opens in a new tab) Feedback (opens in a new tab) API Reference Getting Started API Keys Authorization Token Pagination Rate Limits Status Codes and Handling Core Schema EntryTypes All Entry Types Entry Type by ID Fields All Fields Fields by EntryType Field by ID Multiple Field IDs Choice Field Values Site Metadata Currencies Field Types Field Units Filter Operations Mappings Mappings Ty"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://api.docs.dealcloud.com/",
+              "snippet": "Dealcloud Developer Documentation - DealCloud API Docs 🚀 New: DealCloud MCP Server — client preview starting July 2026 Feedback Feedback (opens in a new tab) Feedback (opens in a new tab) API Reference Getting Started API Keys Authorization Token Pagination Rate Limits Status Codes and Handling Core Schema EntryTypes A"
+            },
+            {
+              "claim": "surface",
+              "term": "api reference",
+              "url": "https://api.docs.dealcloud.com/",
+              "snippet": "Dealcloud Developer Documentation - DealCloud API Docs 🚀 New: DealCloud MCP Server — client preview starting July 2026 Feedback Feedback (opens in a new tab) Feedback (opens in a new tab) API Reference Getting Started API Keys Authorization Token Pagination Rate Limits Status Codes and Handling Core Schema EntryTypes All Entry Types Entry Type by ID Fields All Fields Fields by EntryType Field by ID Multiple Field IDs Choice Field Values Site Metadata Currencies Field Types Field Units Filter O"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://api.docs.dealcloud.com/",
+              "snippet": "Dealcloud Developer Documentation - DealCloud API Docs 🚀 New: DealCloud MCP Server — client preview starting July 2026 Feedback Feedback (opens in a new tab) Feedback (opens in a new tab) API Reference Getting Started API Keys Authorization Token Pagination Rate Limits Status Codes and Handling Core Schema EntryTypes All Entry Types Entry Type by ID Fields All Fields Fields by EntryType Field by ID M"
+            }
+          ]
+        },
+        {
+          "url": "https://www.dealcloud.com/solutions/api/",
+          "status": 200,
+          "error": null,
+          "text_length": 3092,
+          "claim_snippets": [
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://www.dealcloud.com/solutions/api/",
+              "snippet": "collaboration Timekeeping Solutions for service lines Corporate finance Transaction advisory Consulting Back Solutions for consulting firms Deal and relationship management Conflicts of interest management Ethical walls management Enhanced Microsoft 365 collaboration Client onboarding and risk assessments Solutions for service lines Transaction advisory Corporate development Corporate Back Corporate solutions Corporate counsel matter management Deal and relationship management Investment banking"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Gladly",
+      "category": "Support and Helpdesk",
+      "claimed": {
+        "auth_methods": [
+          "API token"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://developer.gladly.com/rest/",
+          "status": 200,
+          "error": null,
+          "text_length": 122404,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "token",
+              "url": "https://developer.gladly.com/rest/",
+              "snippet": "Index=0;var T=p.exec(x),j=1}if(T){h&&(g=T[1]?T[1].length:0);E=(k=T.index+g)+(T=T[0].slice(g)).length;var C=x.slice(0,k),I=x.slice(E),A=[b,j];C&&(++b,w+=C.length,A.push(C));var P=new o(c,d?r.tokenize(T,d):T,y,T,m);if(A.push(P),I&&A.push(I),Array.prototype.splice.apply(t,A),1!=j&&r.matchGrammar(e,t,n,b,w,!0,c),s)break}else if(s)break}}}}},tokenize:function(e,t){var n=[e],o=t.rest;if(o){for(var i in o)t[i]=o[i];delete t.rest}return r.matchGrammar(e,n,t,0,0,!1),n},hooks:{all:{},add:function(e,t){var"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developer.gladly.com/rest/",
+              "snippet": "\",n(n.s=159)}([function(e,t,n){\"use strict\";e.exports=n(222)},function(e,t,n){\"use strict\";n.r(t),n.d(t,\"__extends\",(function(){return o})),n.d(t,\"__assign\",(function(){return i})),n.d(t,\"__rest\",(function(){return a})),n.d(t,\"__decorate\",(function(){return s})),n.d(t,\"__param\",(function(){return l})),n.d(t,\"__metadata\",(function(){return c})),n.d(t,\"__awaiter\",(function(){return u})),n.d(t,\"__generator\",(function(){return f})),n.d(t,\"__exportStar\",(function(){return p})),n.d(t,\"__values\",(funct"
+            }
+          ]
+        },
+        {
+          "url": "https://developer.gladly.com/",
+          "status": 200,
+          "error": null,
+          "text_length": 1380,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://developer.gladly.com/",
+              "snippet": "Main Home - Gladly Developer Gladly Developer Developer Gladly.com Toggle Menu Home Developer API REST API Chat Web SDK Chat iOS SDK Chat Android SDK Help Center Tutorials Help and Support A platform with people at the heart of it Looking to extend Gladly, use Gladly’s REST APIs, receive notifications with webhooks, build an Ap"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://developer.gladly.com/",
+              "snippet": "Main Home - Gladly Developer Gladly Developer Developer Gladly.com Toggle Menu Home Developer API REST API Chat Web SDK Chat iOS SDK Chat Android SDK Help Center Tutorials Help and Support A platform with people at the heart of it Looking to extend Gladly, use Gladly’s REST APIs, receive notifications with webhooks, build an App Platform integration, or export data? You've come to the right place. App Pla"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "gating"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Pumble",
+      "category": "Communications and Messaging",
+      "claimed": {
+        "auth_methods": [
+          "token",
+          "webhook"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://pumble.com/help/api/",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        },
+        {
+          "url": "https://pumble.com/help/integrations/incoming-webhooks/",
+          "status": 200,
+          "error": null,
+          "text_length": 7573,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "admin",
+              "url": "https://pumble.com/help/integrations/incoming-webhooks/",
+              "snippet": "nage Channels Direct Messages Format and Style Messages Sharing Files Search & Navigation Calls and Meetings Profile Account Management Profile Settings & Preferences Personal Notifications Administration Workspace Settings Manage Team Members Billing Pumble Help Center Integrations Incoming Webhooks for Pumble In this article Creating an incoming webhook Using incoming webhook to send a message Error handling Incoming Webhooks for Pumble 5 min read jovana With the incoming webhooks , you can ea"
+            },
+            {
+              "claim": "surface",
+              "term": "webhook",
+              "url": "https://pumble.com/help/integrations/incoming-webhooks/",
+              "snippet": "--> Incoming Webhooks for Pumble - Pumble Help Pumble Team communication and collaboration Clockify Time and cost tracking Plaky Project and task management Powered by Help Changelog Guides FAQ Status Contact Book a demo Contact Integrations --> Tutorials Set Up Pumble Manage users CAKE.com Integrations How to Use Pumble"
+            },
+            {
+              "claim": "gating",
+              "term": "enterprise",
+              "url": "https://pumble.com/help/integrations/incoming-webhooks/",
+              "snippet": "a message Error handling Communication and collaboration software for businesses Book a demo Log in Sign up Product Overview Apps Integrations What's new Roadmap API Plans Free Pro Business Enterprise See pricing Features Channels Messages Threads Notifications History Files Guests Permissions Video Calls Voice Calls Screen Sharing Meeting Links All features Resources Knowledge hub Pumble Guides Tutorials Blog Compare vs. Slack vs. MS Teams vs. Discord vs. Zoom More comparisons Use cases Remote"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "systeme.io",
+      "category": "Marketing, Ads, Email and Social",
+      "claimed": {
+        "auth_methods": [
+          "API key"
+        ],
+        "credential_access": "paid_or_admin",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://developer.systeme.io/reference/api-reference",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        },
+        {
+          "url": "https://help.systeme.io/article/2495-api-key",
+          "status": 404,
+          "error": "HTTPError: 404",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 0,
+        "support_claim_types": [],
+        "missing_claim_types": [
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "verdict": "unreachable"
+      }
+    },
+    {
+      "app": "fanbasis",
+      "category": "Ecommerce",
+      "claimed": {
+        "auth_methods": [
+          "unclear"
+        ],
+        "credential_access": "unclear",
+        "api_surface": [
+          "none"
+        ],
+        "buildability": "blocked",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://fanbasis.com/",
+          "status": 200,
+          "error": null,
+          "text_length": 13405,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "partner",
+              "url": "https://fanbasis.com/",
+              "snippet": "and zero surprises. 7000+ App Integrations Plug into tools you already use—CRMs, workflows, and data pipelines. Built-in Affiliate Engine Track affiliates, pay commissions, and grow through partners. Real-Time Analytics Live dashboards with insights on churn, failed payments, and buyer behavior. White Glove Onboarding & Migration Launch fast with expert-led setup and seamless migration of your data, customers, and offers. Automated Fulfillment Host and auto-deliver courses, communities, or servi"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://fanbasis.com/",
+              "snippet": "and zero surprises. 7000+ App Integrations Plug into tools you already use—CRMs, workflows, and data pipelines. Built-in Affiliate Engine Track affiliates, pay commissions, and grow through partners. Real-Time Analytics Live dashboards with insights on churn, failed payments, and buyer behavior. White Glove Onboarding & Migration Launch fast with expert-led setup and seamless migration of your data, customers, and offers. Automated Fulfillment Host and auto-deliver courses, communities, or servi"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating"
+        ],
+        "missing_claim_types": [
+          "auth",
+          "surface"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Sherlock",
+      "category": "Data, SEO and Scraping",
+      "claimed": {
+        "auth_methods": [
+          "none"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "CLI",
+          "unofficial"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/sherlock-project/sherlock",
+          "status": 200,
+          "error": null,
+          "text_length": 3369,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://github.com/sherlock-project/sherlock",
+              "snippet": "Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start"
+            },
+            {
+              "claim": "surface",
+              "term": "mcp",
+              "url": "https://github.com/sherlock-project/sherlock",
+              "snippet": "content Navigation Menu Toggle navigation Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secr"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://github.com/sherlock-project/sherlock",
+              "snippet": "ct agents from issue to merge MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features Solutions BY COMPANY SIZE Enterprises S"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 1,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    },
+    {
+      "app": "Snowflake",
+      "category": "Developer, Infra and Data platforms",
+      "claimed": {
+        "auth_methods": [
+          "key pair",
+          "OAuth2",
+          "PAT",
+          "Basic"
+        ],
+        "credential_access": "paid_or_admin",
+        "api_surface": [
+          "SQL API",
+          "REST",
+          "SDK"
+        ],
+        "buildability": "buildable",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+          "status": 200,
+          "error": null,
+          "text_length": 184592,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+              "snippet": "that are not supported. Introduction to the SQL API Get an overview of the API. About the SQL API endpoints Learn about the endpoints that make up the API. Authenticating to the server Use OAuth or Key Pair to authenticate with the Snowflake server. Submitting a request to execute SQL statements Set up and submit requests using an API endpoint. Handling responses Check request status and get results and other data after a request. Submitting multiple SQL statements in a single request Send mult"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+              "snippet": "Snowflake SQL API | Snowflake Documentation DOCUMENTATION / EN Language English Français Deutsch 日本語 한국어 Português Get started Guides Developer Reference Release notes Tutorials Status Overview Snowflake Horizon Catalog Applications and tools for connecting to Snowflake Virtual warehouses Databases, Tables, & Views Data types Data Integration Snowflake Openflow Apache Iceberg™ Apache Iceberg™ Tables Snowflake Open Catalog Zero-Copy Connecto"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+              "snippet": "Postgres Alerts & Notifications Security Organizations & Accounts Business continuity & data recovery Performance optimization Cost & Billing Snowflake SQL API ¶ The Snowflake SQL API is a REST API that you can use to access and update data in a Snowflake database. You can use this API to develop custom applications and integrations that: Perform queries Manage your deployment (e.g. provision users and roles, create tables, etc.) The Snowflake SQL API provides operations that you can use to: Su"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+              "snippet": "ype\":\"page\",\"href\":\"/en/user-guide/ecosystem\",\"active\":false,\"depth\":1,\"isInitiallyOpen\":false,\"parentRef\":\"/en/guides-overview-connecting\",\"children\":[{\"id\":\"5f06af323d164b59\",\"label\":\"All Partners and Technologies\",\"type\":\"page\",\"href\":\"/en/user-guide/ecosystem-all\",\"active\":false,\"depth\":2,\"isInitiallyOpen\":false,\"parentRef\":\"/en/user-guide/ecosystem\",\"children\":[]},{\"id\":\"311093c3eb0b9c1b\",\"label\":\"Data Integration\",\"type\":\"page\",\"href\":\"/en/user-guide/ecosystem-etl\",\"active\":false,\"depth\":2"
+            }
+          ]
+        },
+        {
+          "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+          "status": 200,
+          "error": null,
+          "text_length": 145658,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+              "snippet": "r when using the Snowflake SQL API. When you send a request, the request must include authentication information. The next sections explain how to add this information to the request: Using OAuth Using key-pair authentication Using workload identity federation Using OAuth ¶ To use OAuth, follow these steps: Set up OAuth for authentication. See Introduction to OAuth for details on how to set up OAuth and get an OAuth token. Use Snowflake CLI to verify that you can use a generated OAuth token to c"
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+              "snippet": "Authenticating to the server | Snowflake Documentation DOCUMENTATION / EN Language English Français Deutsch 日本語 한국어 Português Get started Guides Developer Reference Release notes Tutorials Status Overview Builders DevOps with Snowflake Observability Snowpark Library Snowpark API Snowpark Connect for Apache Spark Machine Learning Snowflake ML Snowpark Code Execution Environments Snowpark Container Services Functions and procedures Logging, Tracing, and"
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+              "snippet": "Learning Snowflake ML Snowpark Code Execution Environments Snowpark Container Services Functions and procedures Logging, Tracing, and Metrics Snowflake APIs Snowflake Python APIs Snowflake REST APIs SQL API Introduction Endpoints Authentication Submitting requests Handling responses Multiple statements Stored procedures Transactions Handling errors Query canceling SQL API reference Deprecated functionality Apps Streamlit in Snowflake About Streamlit in Snowflake Getting started Getting started"
+            },
+            {
+              "claim": "gating",
+              "term": "restricted",
+              "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+              "snippet": "ation Personalization with user information Migrations and upgrades Identify your app type Migrate to a container runtime Migrate from ROOT_LOCATION Features External access Git integration Restricted caller's rights Logging and tracing Row access policies Sharing Streamlit in Snowflake apps Sleep timer Streamlit in Snowflake in Workspaces Limitations and library changes Troubleshooting Streamlit in Snowflake Streamlit open-source library documentation Snowflake App Runtime Snowflake Native App"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "Airtable",
+      "category": "Productivity and Project Management",
+      "claimed": {
+        "auth_methods": [
+          "OAuth2",
+          "PAT"
+        ],
+        "credential_access": "self_serve",
+        "api_surface": [
+          "REST",
+          "Webhooks"
+        ],
+        "buildability": "easy_win",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://airtable.com/developers/web/api/introduction",
+          "status": 200,
+          "error": null,
+          "text_length": 241853,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://airtable.com/developers/web/api/introduction",
+              "snippet": "thInitialConfigState\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\"disabled\"}},\"demoOnlyGlobalFlag\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\"disabled\"}},\"singleActiveOauthTokenForGeneratedSites\":{\"precalculatedVariant\":{\"variant\":\"treatment\",\"reason\":\"simpleFlag\"}},\"workspacesApplicationsAndPageBundlesSupersetFetch\":{\"trafficLevel\":50},\"serveLiveappUnchunkedBundle\":{\"trafficLevel\":0},\"throttleChunkLoadingConcurrency\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\""
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://airtable.com/developers/web/api/introduction",
+              "snippet": "ttonAction\",\"blocks.sendgridButtonAction\",\"blocks.pageDesignerButtonAction\",\"collaboratorAttributionFields\",\"showNewOnboardingQuestionnaireRollout\",\"showHomescreenImportBannerRollout\",\"blockDeveloperToolsOpenRecord\",\"lookupMolecule\",\"richTextLinkShortcuts\",\"workflows\",\"conditionalFormFields\",\"conditionalRelationalColumns\",\"updateEmailInAdminPanel\",\"importLandingDialogExperiment\",\"csvImportSize5MB\",\"undoSnackbar\",\"viewDescriptions\",\"blockDescriptions\",\"blocks.script.trackRestrictedGlobalAccess\",\""
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://airtable.com/developers/web/api/introduction",
+              "snippet": "\"browserId\":\"brwW9AncBAiuKAPp4\",\"csrfToken\":\"ETOImkXk-U3xkH8f5L4lkz1Jlt7kP_As6Ea8\",\"enabledFeatureNames\":[\"clipboardDataTransferPolicy\",\"workflowsFormSubmittedTrigger\",\"adminPanelIntegrationRestrictionGoogleDrive\",\"externalTableSyncGoogleDrive\",\"externalAccountsGoogleDrive\",\"externalAccountsReconnectFlow\",\"adminPanelIntegrationRestrictionSalesforce\",\"adminPanelExternalSyncSources\",\"workflowsHootsuiteSchedulePost\",\"adminPanelIntegrationRestrictionHootsuite\",\"externalAccountsHootsuite\",\"externalTa"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://airtable.com/developers/web/api/introduction",
+              "snippet": "ntsGoogleForms\",\"externalAccountsGoogleCalendar\",\"externalAccountsGmail\",\"workspaceSharingOverride\",\"workflowsTrash\",\"showNewOnboardingQuestionnaireV2\",\"workflowsDuplicate\",\"videoAttachmentPreviews\",\"editableSharedViewsInlineEditing\",\"workflowsEnterpriseRollout\",\"blocks.sdkMinimumVersionEnforcement\",\"createLookupsFromColumnMenu\",\"addRowButtonForComputedGroups\",\"workflowsRecordCreatedTrigger\",\"collapseRevisionHistoryInDetailViewExperimentOverride\",\"blocks.pexelsButtonAction\",\"blocks.formstackButt"
+            }
+          ]
+        },
+        {
+          "url": "https://airtable.com/developers/web/api/authentication",
+          "status": 200,
+          "error": null,
+          "text_length": 241847,
+          "claim_snippets": [
+            {
+              "claim": "auth",
+              "term": "oauth",
+              "url": "https://airtable.com/developers/web/api/authentication",
+              "snippet": "thInitialConfigState\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\"disabled\"}},\"demoOnlyGlobalFlag\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\"disabled\"}},\"singleActiveOauthTokenForGeneratedSites\":{\"precalculatedVariant\":{\"variant\":\"treatment\",\"reason\":\"simpleFlag\"}},\"workspacesApplicationsAndPageBundlesSupersetFetch\":{\"trafficLevel\":50},\"serveLiveappUnchunkedBundle\":{\"trafficLevel\":0},\"throttleChunkLoadingConcurrency\":{\"precalculatedVariant\":{\"variant\":\"control\",\"reason\":\""
+            },
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://airtable.com/developers/web/api/authentication",
+              "snippet": "ttonAction\",\"blocks.sendgridButtonAction\",\"blocks.pageDesignerButtonAction\",\"collaboratorAttributionFields\",\"showNewOnboardingQuestionnaireRollout\",\"showHomescreenImportBannerRollout\",\"blockDeveloperToolsOpenRecord\",\"lookupMolecule\",\"richTextLinkShortcuts\",\"workflows\",\"conditionalFormFields\",\"conditionalRelationalColumns\",\"updateEmailInAdminPanel\",\"importLandingDialogExperiment\",\"csvImportSize5MB\",\"undoSnackbar\",\"viewDescriptions\",\"blockDescriptions\",\"blocks.script.trackRestrictedGlobalAccess\",\""
+            },
+            {
+              "claim": "surface",
+              "term": "rest",
+              "url": "https://airtable.com/developers/web/api/authentication",
+              "snippet": "\"browserId\":\"brwpsgOtIxhnFwgiq\",\"csrfToken\":\"NYiGdAhh-BV6ofqGGl6XpDns1-L6sqqBd6II\",\"enabledFeatureNames\":[\"clipboardDataTransferPolicy\",\"workflowsFormSubmittedTrigger\",\"adminPanelIntegrationRestrictionGoogleDrive\",\"externalTableSyncGoogleDrive\",\"externalAccountsGoogleDrive\",\"externalAccountsReconnectFlow\",\"adminPanelIntegrationRestrictionSalesforce\",\"adminPanelExternalSyncSources\",\"workflowsHootsuiteSchedulePost\",\"adminPanelIntegrationRestrictionHootsuite\",\"externalAccountsHootsuite\",\"externalTa"
+            },
+            {
+              "claim": "gating",
+              "term": "review",
+              "url": "https://airtable.com/developers/web/api/authentication",
+              "snippet": "ntsGoogleForms\",\"externalAccountsGoogleCalendar\",\"externalAccountsGmail\",\"workspaceSharingOverride\",\"workflowsTrash\",\"showNewOnboardingQuestionnaireV2\",\"workflowsDuplicate\",\"videoAttachmentPreviews\",\"editableSharedViewsInlineEditing\",\"workflowsEnterpriseRollout\",\"blocks.sdkMinimumVersionEnforcement\",\"createLookupsFromColumnMenu\",\"addRowButtonForComputedGroups\",\"workflowsRecordCreatedTrigger\",\"collapseRevisionHistoryInDetailViewExperimentOverride\",\"blocks.pexelsButtonAction\",\"blocks.formstackButt"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [],
+        "verdict": "supported"
+      }
+    },
+    {
+      "app": "PitchBook",
+      "category": "Finance and Fintech",
+      "claimed": {
+        "auth_methods": [
+          "token"
+        ],
+        "credential_access": "partner_gated",
+        "api_surface": [
+          "REST"
+        ],
+        "buildability": "gated",
+        "mcp_status": "none"
+      },
+      "sources": [
+        {
+          "url": "https://pitchbook.com/data/our-data/api",
+          "status": 403,
+          "error": "HTTPError: 403",
+          "text_length": 0,
+          "claim_snippets": []
+        },
+        {
+          "url": "https://pitchbook.com/solutions/research",
+          "status": 403,
+          "error": "HTTPError: 403",
+          "text_length": 0,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 0,
+        "support_claim_types": [],
+        "missing_claim_types": [
+          "auth",
+          "gating",
+          "surface"
+        ],
+        "verdict": "unreachable"
+      }
+    },
+    {
+      "app": "Fathom",
+      "category": "AI, Research and Media-native",
+      "claimed": {
+        "auth_methods": [
+          "token"
+        ],
+        "credential_access": "unclear",
+        "api_surface": [
+          "unofficial"
+        ],
+        "buildability": "blocked",
+        "mcp_status": "community"
+      },
+      "sources": [
+        {
+          "url": "https://fathom.video/",
+          "status": 200,
+          "error": null,
+          "text_length": 7293,
+          "claim_snippets": [
+            {
+              "claim": "access",
+              "term": "developer",
+              "url": "https://fathom.video/",
+              "snippet": "s For marketing For sales For teams Integrations Asana ChatGPT Claude Hubspot Salesforce Zapier Public API & MCP See All Integrations → Resources What's New Resource Hub Partner with Fathom Developer Hub Help Center Pricing Sign Up sign up free Book a Demo Log In Book a Demo Log In Sign Up SIGN UP FREE SIGN UP FREE AI notetaking that is out of this world Fathom summarizes your meetings so you can focus on the conversation. Now available bot-free. Get started - free forever SOC 2 Type II | GDPR |"
+            },
+            {
+              "claim": "surface",
+              "term": "mcp",
+              "url": "https://fathom.video/",
+              "snippet": "CLAUDE INTEGRATIONS & MORE SEE WHAT'S NEW Overview Solutions For customer success For marketing For sales For teams Integrations Asana ChatGPT Claude Hubspot Salesforce Zapier Public API & MCP See All Integrations → Resources What's New Resource Hub Partner with Fathom Developer Hub Help Center Pricing Sign Up sign up free Book a Demo Log In Book a Demo Log In Sign Up SIGN UP FREE SIGN UP FREE AI notetaking that is out of this world Fathom summarizes your meetings so you can focus on the conver"
+            },
+            {
+              "claim": "gating",
+              "term": "partner",
+              "url": "https://fathom.video/",
+              "snippet": "For customer success For marketing For sales For teams Integrations Asana ChatGPT Claude Hubspot Salesforce Zapier Public API & MCP See All Integrations → Resources What's New Resource Hub Partner with Fathom Developer Hub Help Center Pricing Sign Up sign up free Book a Demo Log In Book a Demo Log In Sign Up SIGN UP FREE SIGN UP FREE AI notetaking that is out of this world Fathom summarizes your meetings so you can focus on the conversation. Now available bot-free. Get started - free forever SO"
+            }
+          ]
+        },
+        {
+          "url": "https://help.fathom.video/",
+          "status": 200,
+          "error": null,
+          "text_length": 506,
+          "claim_snippets": []
+        }
+      ],
+      "audit": {
+        "reachable_sources": 2,
+        "support_claim_types": [
+          "access",
+          "gating",
+          "surface"
+        ],
+        "missing_claim_types": [
+          "auth"
+        ],
+        "verdict": "partial"
+      }
+    }
+  ]
+}

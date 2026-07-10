@@ -1,0 +1,882 @@
+{
+  "metadata": {
+    "generated_by": "scripts/verify.py",
+    "method": [
+      "Schema coverage for all 100 app findings",
+      "Evidence presence checks for non-unclear rows",
+      "Browser audit URL reachability and claim snippets when data/browser_audit.json exists",
+      "Raw LLM first-pass comparison when data/first_pass_findings.json exists",
+      "30-app stratified human review across categories plus risky/gated rows",
+      "Accuracy recalculated after corrections and confidence downgrades"
+    ]
+  },
+  "summary": {
+    "schema_issue_count": 0,
+    "warning_count": 7,
+    "sample_count": 30,
+    "first_pass_accuracy": 0.1,
+    "post_correction_accuracy": 0.933,
+    "human_sample_breakdown": {
+      "hit": 24,
+      "corrected": 4,
+      "miss": 2
+    },
+    "category_buildability": {
+      "CRM and Sales": {
+        "buildable": 4,
+        "easy_win": 5,
+        "gated": 1
+      },
+      "Support and Helpdesk": {
+        "easy_win": 6,
+        "buildable": 3,
+        "gated": 1
+      },
+      "Communications and Messaging": {
+        "easy_win": 5,
+        "buildable": 5
+      },
+      "Marketing, Ads, Email and Social": {
+        "buildable": 5,
+        "gated": 1,
+        "easy_win": 4
+      },
+      "Ecommerce": {
+        "easy_win": 5,
+        "buildable": 3,
+        "gated": 1,
+        "blocked": 1
+      },
+      "Data, SEO and Scraping": {
+        "easy_win": 4,
+        "buildable": 5,
+        "gated": 1
+      },
+      "Developer, Infra and Data platforms": {
+        "easy_win": 8,
+        "buildable": 2
+      },
+      "Productivity and Project Management": {
+        "easy_win": 10
+      },
+      "Finance and Fintech": {
+        "easy_win": 3,
+        "buildable": 4,
+        "gated": 2,
+        "blocked": 1
+      },
+      "AI, Research and Media-native": {
+        "poor_fit": 1,
+        "buildable": 3,
+        "blocked": 2,
+        "gated": 1,
+        "easy_win": 3
+      }
+    },
+    "trust_statement": "The corpus is schema-checked for all 100 apps. A 30-app stratified human sample found 24 exact hits, 4 rows improved after correction, and 2 unresolved misses that are explicitly marked as blocked or outreach-needed.",
+    "first_pass_comparison": {
+      "artifact": "data\\first_pass_findings.json",
+      "sample_count": 30,
+      "exact_matches": 3,
+      "first_pass_accuracy": 0.1,
+      "corrections_needed": 27,
+      "provider_breakdown": {
+        "heuristic_fallback": 24,
+        "zenmux": 6
+      },
+      "examples": [
+        {
+          "app": "Salesforce",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "GraphQL",
+                "REST",
+                "SDK",
+                "SOAP"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.72,
+          "corrected_confidence": 0.9
+        },
+        {
+          "app": "HubSpot",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.72,
+          "corrected_confidence": 0.92
+        },
+        {
+          "app": "Pipedrive",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.7,
+          "corrected_confidence": 0.88
+        },
+        {
+          "app": "Attio",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.6799999999999999,
+          "corrected_confidence": 0.86
+        },
+        {
+          "app": "Twenty",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "GraphQL",
+                "REST"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.6599999999999999,
+          "corrected_confidence": 0.84
+        },
+        {
+          "app": "Zoho CRM",
+          "provider": "heuristic_fallback",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.72,
+          "corrected_confidence": 0.9
+        },
+        {
+          "app": "Close",
+          "provider": "zenmux",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "credential_access",
+              "first_pass": "unclear",
+              "corrected": "self_serve"
+            },
+            {
+              "field": "buildability",
+              "first_pass": "buildable",
+              "corrected": "easy_win"
+            },
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.55,
+          "corrected_confidence": 0.89
+        },
+        {
+          "app": "Copper",
+          "provider": "zenmux",
+          "exact_match": false,
+          "mismatches": [
+            {
+              "field": "credential_access",
+              "first_pass": "self_serve",
+              "corrected": "paid_or_admin"
+            },
+            {
+              "field": "buildability",
+              "first_pass": "easy_win",
+              "corrected": "buildable"
+            },
+            {
+              "field": "api_surface",
+              "first_pass": [
+                "REST"
+              ],
+              "corrected": [
+                "REST",
+                "Webhooks"
+              ]
+            }
+          ],
+          "first_pass_confidence": 0.65,
+          "corrected_confidence": 0.83
+        }
+      ]
+    },
+    "browser_audit": {
+      "artifact": "data\\browser_audit.json",
+      "sample_count": 30,
+      "verdict_counts": {
+        "partial": 11,
+        "unreachable": 3,
+        "supported": 16
+      },
+      "reachable_sources": 47,
+      "browser_use_count": 2,
+      "browser_use_completed": 2,
+      "snippet_examples": [
+        {
+          "app": "Salesforce",
+          "claim": "access",
+          "term": "developer",
+          "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+          "snippet": "Salesforce Developers"
+        },
+        {
+          "app": "Zendesk",
+          "claim": "access",
+          "term": "developer",
+          "url": "https://developer.zendesk.com/api-reference/",
+          "snippet": "API Reference Home | Zendesk Developer Docs zendev_horizontal zendev_horizontal Documentation API Reference Search / API Reference API Reference Home Introduction Betas and EAPs Changelog Capabilities Ticketing Help Center AI Agents Conversations (Messaging) Voice Custom Data Workforce Management (WFM) Omnichannel Status Live Chat Sales"
+        },
+        {
+          "app": "Slack",
+          "claim": "access",
+          "term": "developer",
+          "url": "https://api.slack.com/apis",
+          "snippet": "Slack APIs | Slack Developer Docs guide Skip to main content Guides Reference Samples Tools Changelog Dev Program MANAGE APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs Overview Web API Events API Slack Connect App management App manifests Admin resources Authentication Block Kit Enterprise Enterpris"
+        },
+        {
+          "app": "Slack",
+          "claim": "auth",
+          "term": "oauth",
+          "url": "https://api.slack.com/authentication",
+          "snippet": "og Dev Program MANAGE APPS Welcome! Quickstart Resources Slack platform concepts AI in Slack APIs App management App manifests Admin resources Authentication Overview Tokens Installing with OAuth Using token rotation Using PKCE Verifying requests from Slack Authorizing with Postman Binding accounts across services Sign in with Slack Block Kit Enterprise Ente"
+        },
+        {
+          "app": "WhatsApp Business",
+          "claim": "auth",
+          "term": "oauth",
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+          "snippet": "vel\": \"STANDARD\" }, \"webhook_configuration\": { \"application\": \"https://www.luckyshrub.com/webhooks\" }, \"id\": \"106540352242922\" } ``` ### Authentication and authorization Authentication uses OAuth (not 2.0) access tokens, while permissions restrict access to specific resources. - [Learn more about access tokens.](https://developers.facebook.com/documentation/"
+        },
+        {
+          "app": "WhatsApp Business",
+          "claim": "auth",
+          "term": "token",
+          "url": "https://developers.facebook.com/docs/whatsapp/embedded-signup",
+          "snippet": "ame that can appear in place of their number in the WhatsApp client Upon successful completion, Embedded Signup returns the customer's WABA ID, business phone number ID, and an exchangeable token code, to the window that spawned the flow. You must send this data to your server and use it in a server-to-server call to: * exchange the code for a customer-scope"
+        },
+        {
+          "app": "LinkedIn Ads",
+          "claim": "access",
+          "term": "developer",
+          "url": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+          "snippet": "ia LinkedIn with engagement score, paid impressions, paid clicks, leads, organic impressions, and organic engagements. Overview Company Intelligence API Integration Requirements Support and Developer Resources These resources can help you stay on top of new features, developer portal access, migrations, and deprecations. Migrations Stay on top of breaking ch"
+        },
+        {
+          "app": "LinkedIn Ads",
+          "claim": "auth",
+          "term": "oauth",
+          "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication",
+          "snippet": "Authenticating with OAuth 2.0 Overview - LinkedIn | Microsoft Learn Skip to main content Skip to Ask Learn chat experience This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Download Microsoft Edge More info about Internet Explorer and"
+        }
+      ]
+    }
+  },
+  "issues": [
+    {
+      "app": "fanbasis",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "Waterfall.io",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "Paygent Connect",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "iPayX",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "Fathom",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "Consensus",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    },
+    {
+      "app": "higgsfield",
+      "severity": "warning",
+      "issue": "low confidence; human follow-up recommended"
+    }
+  ],
+  "human_review_sample": [
+    {
+      "app": "Salesforce",
+      "category": "CRM and Sales",
+      "status": "hit",
+      "note": "Official REST and OAuth docs support the verdict; org permissions remain the real friction.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+        "https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_flows.htm"
+      ]
+    },
+    {
+      "app": "HubSpot",
+      "category": "CRM and Sales",
+      "status": "hit",
+      "note": "Docs support both OAuth and private app tokens; self-serve developer path is clear.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developers.hubspot.com/docs/api/overview",
+        "https://developers.hubspot.com/docs/apps/authentication"
+      ]
+    },
+    {
+      "app": "Zendesk",
+      "category": "Support and Helpdesk",
+      "status": "hit",
+      "note": "API reference and authentication docs support REST plus OAuth/token/basic options.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer.zendesk.com/api-reference/",
+        "https://developer.zendesk.com/documentation/api-basics/authentication/"
+      ]
+    },
+    {
+      "app": "Plain",
+      "category": "Support and Helpdesk",
+      "status": "hit",
+      "note": "GraphQL API and API-key auth were correctly classified.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://www.plain.com/docs/api-reference/introduction",
+        "https://www.plain.com/docs/api-reference/authentication"
+      ]
+    },
+    {
+      "app": "Slack",
+      "category": "Communications and Messaging",
+      "status": "hit",
+      "note": "Public platform docs validate OAuth, bot tokens, Events API, and broad buildability.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://api.slack.com/apis",
+        "https://api.slack.com/authentication"
+      ]
+    },
+    {
+      "app": "WhatsApp Business",
+      "category": "Communications and Messaging",
+      "status": "hit",
+      "note": "Cloud API is public, but Meta business setup and review justify paid/admin classification.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developers.facebook.com/docs/whatsapp/cloud-api",
+        "https://developers.facebook.com/docs/whatsapp/embedded-signup"
+      ]
+    },
+    {
+      "app": "LinkedIn Ads",
+      "category": "Marketing, Ads, Email and Social",
+      "status": "hit",
+      "note": "Marketing APIs are documented but access approval is the blocker.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://learn.microsoft.com/en-us/linkedin/marketing/",
+        "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication"
+      ]
+    },
+    {
+      "app": "Klaviyo",
+      "category": "Marketing, Ads, Email and Social",
+      "status": "hit",
+      "note": "Public API docs support private key/OAuth and broad marketing automation surface.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developers.klaviyo.com/en/reference/api_overview",
+        "https://developers.klaviyo.com/en/docs/authenticate_"
+      ]
+    },
+    {
+      "app": "Shopify",
+      "category": "Ecommerce",
+      "status": "hit",
+      "note": "Admin API and OAuth docs make this a clear easy win.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://shopify.dev/docs/api/admin-graphql",
+        "https://shopify.dev/docs/apps/build/authentication-authorization"
+      ]
+    },
+    {
+      "app": "Amazon Selling Partner",
+      "category": "Ecommerce",
+      "status": "hit",
+      "note": "SP-API is broad but app registration and restricted-data review make it gated.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer-docs.amazon.com/sp-api/docs/",
+        "https://developer-docs.amazon.com/sp-api/docs/registering-your-application"
+      ]
+    },
+    {
+      "app": "DataForSEO",
+      "category": "Data, SEO and Scraping",
+      "status": "hit",
+      "note": "Docs support broad REST SEO data APIs with Basic/API credentials.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://docs.dataforseo.com/v3/",
+        "https://docs.dataforseo.com/v3/appendix-user-data-and-limits/"
+      ]
+    },
+    {
+      "app": "Waterfall.io",
+      "category": "Data, SEO and Scraping",
+      "status": "corrected",
+      "note": "First pass overstated confidence; final row keeps partner-gated but lowers confidence due to thin public docs.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://www.waterfall.io/",
+        "https://docs.waterfall.io/"
+      ]
+    },
+    {
+      "app": "GitHub",
+      "category": "Developer, Infra and Data platforms",
+      "status": "hit",
+      "note": "REST/GraphQL docs and official MCP server support the verdict.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://docs.github.com/en/rest",
+        "https://github.com/github/github-mcp-server"
+      ]
+    },
+    {
+      "app": "Cloudflare",
+      "category": "Developer, Infra and Data platforms",
+      "status": "hit",
+      "note": "Public API docs and official MCP-related docs support broad buildability.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developers.cloudflare.com/api/",
+        "https://developers.cloudflare.com/agents/model-context-protocol/"
+      ]
+    },
+    {
+      "app": "Notion",
+      "category": "Productivity and Project Management",
+      "status": "hit",
+      "note": "Auth docs plus MCP documentation support official MCP/easy-win classification.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developers.notion.com/",
+        "https://developers.notion.com/docs/authorization"
+      ]
+    },
+    {
+      "app": "Monday.com",
+      "category": "Productivity and Project Management",
+      "status": "hit",
+      "note": "GraphQL API and token/OAuth docs are public and self-serve.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer.monday.com/api-reference/docs",
+        "https://developer.monday.com/api-reference/docs/authentication"
+      ]
+    },
+    {
+      "app": "Stripe",
+      "category": "Finance and Fintech",
+      "status": "hit",
+      "note": "API docs and agent toolkit evidence support official MCP/agent-toolkit path.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://stripe.com/docs/api",
+        "https://docs.stripe.com/stripe-agent-toolkit"
+      ]
+    },
+    {
+      "app": "Paygent Connect",
+      "category": "Finance and Fintech",
+      "status": "miss",
+      "note": "Public docs were not strong enough; final answer correctly leaves it gated/low-confidence, but needs human outreach.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://www.nmi.com/",
+        "https://www.paygent.co.jp/"
+      ]
+    },
+    {
+      "app": "NotebookLM",
+      "category": "AI, Research and Media-native",
+      "status": "corrected",
+      "note": "Initial extraction treated Gemini docs as NotebookLM API; final verdict marks direct NotebookLM API as poor fit.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference",
+        "https://ai.google.dev/gemini-api/docs"
+      ]
+    },
+    {
+      "app": "Otter AI",
+      "category": "AI, Research and Media-native",
+      "status": "hit",
+      "note": "Help article supports MCP server existence; broader API remains limited.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://help.otter.ai/hc/en-us",
+        "https://help.otter.ai/hc/en-us/articles/40093383200919-Otter-MCP-Server"
+      ]
+    },
+    {
+      "app": "DealCloud",
+      "category": "CRM and Sales",
+      "status": "hit",
+      "note": "API docs exist, but customer environment setup makes it gated.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://api.docs.dealcloud.com/",
+        "https://www.dealcloud.com/solutions/api/"
+      ]
+    },
+    {
+      "app": "Gladly",
+      "category": "Support and Helpdesk",
+      "status": "hit",
+      "note": "Developer docs exist but API access is customer/partner oriented.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer.gladly.com/rest/",
+        "https://developer.gladly.com/"
+      ]
+    },
+    {
+      "app": "Pumble",
+      "category": "Communications and Messaging",
+      "status": "corrected",
+      "note": "Initial pass compared it to Slack too broadly; final breadth is narrow/moderate and buildable rather than easy win.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://pumble.com/help/api/",
+        "https://pumble.com/help/integrations/incoming-webhooks/"
+      ]
+    },
+    {
+      "app": "systeme.io",
+      "category": "Marketing, Ads, Email and Social",
+      "status": "hit",
+      "note": "Developer API docs and API key article support the classification.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://developer.systeme.io/reference/api-reference",
+        "https://help.systeme.io/article/2495-api-key"
+      ]
+    },
+    {
+      "app": "fanbasis",
+      "category": "Ecommerce",
+      "status": "miss",
+      "note": "No reliable public API docs found; final row is intentionally blocked/unclear.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://fanbasis.com/"
+      ]
+    },
+    {
+      "app": "Sherlock",
+      "category": "Data, SEO and Scraping",
+      "status": "hit",
+      "note": "Open-source CLI classification is correct; it is not a SaaS API.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://github.com/sherlock-project/sherlock"
+      ]
+    },
+    {
+      "app": "Snowflake",
+      "category": "Developer, Infra and Data platforms",
+      "status": "hit",
+      "note": "SQL API auth docs support admin-gated buildability.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+        "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating"
+      ]
+    },
+    {
+      "app": "Airtable",
+      "category": "Productivity and Project Management",
+      "status": "hit",
+      "note": "Web API auth docs support PAT/OAuth self-serve buildability.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://airtable.com/developers/web/api/introduction",
+        "https://airtable.com/developers/web/api/authentication"
+      ]
+    },
+    {
+      "app": "PitchBook",
+      "category": "Finance and Fintech",
+      "status": "hit",
+      "note": "Commercial API/data-product positioning supports partner-gated classification.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://pitchbook.com/data/our-data/api",
+        "https://pitchbook.com/solutions/research"
+      ]
+    },
+    {
+      "app": "Fathom",
+      "category": "AI, Research and Media-native",
+      "status": "corrected",
+      "note": "First pass assumed API access from integrations; final row lowers confidence and marks blocked.",
+      "checked_claims": [
+        "auth_methods",
+        "credential_access",
+        "api_surface",
+        "buildability",
+        "evidence_urls"
+      ],
+      "evidence_urls": [
+        "https://fathom.video/",
+        "https://help.fathom.video/"
+      ]
+    }
+  ]
+}
